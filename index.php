@@ -14,8 +14,8 @@
 <body>
    
     <?php
-        include 'includes/navbar.php';
-        include 'includes/sidebar.php';
+        include 'includes/navbar.php';  //meee wageeeee karannnn
+        include 'includes/sidebar.php'; //meee wageeeee karannnn
     ?>
     
     <div class="content">
