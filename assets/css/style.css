@@ -1,13 +1,17 @@
-/* Sidebar */
 .sidebar {
     width: 323px;
     height: 100vh;
-    background: #5C5458;
-    opacity: 0.03;
+    background: #f8f9fa; /* Light background */
     padding: 20px;
     position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1050; /* Increase z-index to ensure it's above everything */
     transition: transform 0.3s ease;
+   
+    opacity: 1 !important; /* Ensure the sidebar is fully visible */
 }
+
 
 /* Logo */
 .logo img {
@@ -62,43 +66,45 @@
 
 /* Navbar */
 .navbar {
-    width: calc(100% - 323px);
-    height: 126px;
-    position: fixed;
-    right: 0;
-    background: white;
+    height: 80px; /* Reduced height */
+    padding: 10px 20px; /* Adjusted padding */
+    align-items: center; /* Vertically center content */
+}
+
+.navbar .container-fluid {
     display: flex;
-    align-items: center;
-    padding: 20px;
-    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between; /* Distribute space between elements */
+    align-items: center; /* Vertically align items */
 }
 
-/* Search Bar */
-.search-bar {
-    width: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.navbar .input-group {
+    margin-left: 0; /* Remove left margin */
+    width: auto; /* Adjust width as needed */
+    flex-grow: 1; /* Allow search bar to grow */
+    margin-bottom: 10px; /* Add margin bottom for smaller screens */
 }
 
-/* Nav Icons */
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.navbar .d-flex {
+    margin-left: 0; /* Remove left margin */
+    margin-top: 10px; /* Add margin top for smaller screens */
 }
 
-.xp {
-    font-weight: bold;
-    background: gold;
-    padding: 5px 10px;
-    border-radius: 8px;
+/* Media query for smaller screens */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    .navbar .input-group {
+        order: 2; /* Place search bar after the hamburger menu */
+        width: 100%; /* Make search bar full width */
+    }
+    .navbar .d-flex {
+        order: 3; /* Place XP, coins, and profile after search bar */
+        justify-content: center; /* Center the items */
+        width: 100%; /* Make them full width */
+    }
+    .navbar-expand-lg .navbar-toggler {
+        margin-right: auto; /* Move the toggler to the left */
+    }
 }
-
-.coins {
-    font-weight: bold;
-}
-
 /* Responsive - Hamburger */
 .hamburger {
     display: none;
@@ -107,11 +113,11 @@
 }
 
 /* Mobile View */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .sidebar {
-        transform: translateX(-100%);
+        display: none; /* Hide the fixed sidebar on smaller screens */
     }
-    
+
     .hamburger {
         display: block;
         position: absolute;
@@ -119,11 +125,17 @@
         left: 20px;
     }
 
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
     .navbar {
         width: 100%;
     }
+}
+
+/* Sidebar Hover Effect */
+.nav-link {
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #D8FFDE;
+    border-radius: 10px;
 }
