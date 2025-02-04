@@ -1,7 +1,7 @@
 <div class="d-flex flex-column bg-light text-white p-3" style="width: 250px; height: 100vh; position: fixed;">
     <!-- Logo -->
     <div class="mb-4">
-        <img src="assets/images/The Kuppiya 1.png" alt="Logo" class="img-fluid">
+        <img src="../assets/images/The Kuppiya 1.png" alt="Logo" class="img-fluid">
     </div>
 
     <!-- Sidebar Menu -->
