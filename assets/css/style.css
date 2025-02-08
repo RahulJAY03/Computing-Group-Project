@@ -69,6 +69,7 @@
     height: 80px; /* Reduced height */
     padding: 10px 20px; /* Adjusted padding */
     align-items: center; /* Vertically center content */
+    margin-left:320px;
 }
 
 .navbar .container-fluid {

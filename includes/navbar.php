@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:80px;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:80px; ">
     <div class="container-fluid">
         <button class="btn btn-outline-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
             <i class="bi bi-list" style="font-size: 24px;"></i>
