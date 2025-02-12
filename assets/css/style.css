@@ -9,8 +9,6 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
 
-
-
 /* Logo */
 .logo img {
     width: 278px;
@@ -64,46 +62,109 @@
 
 /* Navbar */
 .navbar {
-    height: 80px; /* Reduced height */
-    padding: 10px 20px; /* Adjusted padding */
-    align-items: center; /* Vertically center content */
-    margin-left:320px;
+    height: 80px; /* Maintains consistent height */
+    padding: 10px 20px;
+    align-items: center;
+    margin-left: 250px; /* Keeps navbar aligned when sidebar is visible */
+    transition: margin-left 0.3s ease-in-out;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* ===== Navbar Container ===== */
 .navbar .container-fluid {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: space-between; /* Distribute space between elements */
-    align-items: center; /* Vertically align items */
+    flex-wrap: wrap; /* Allows content to wrap properly */
+    justify-content: space-between;
+    align-items: center;
 }
 
+/* ===== Sidebar Toggle Button (For Mobile) ===== */
+.navbar-toggler {
+    display: none;
+}
+
+/* ===== Search Bar ===== */
 .navbar .input-group {
-    margin-left: 0; /* Remove left margin */
-    width: auto; /* Adjust width as needed */
-    flex-grow: 1; /* Allow search bar to grow */
-    margin-bottom: 10px; /* Add margin bottom for smaller screens */
+    flex-grow: 1; /* Allows the search bar to expand */
+    max-width: 400px;
+    transition: width 0.3s ease-in-out;
 }
 
+.navbar .input-group input {
+    border-radius: 20px;
+    padding: 8px 12px;
+}
+
+/* ===== XP, Coins, and Profile Section ===== */
 .navbar .d-flex {
-    margin-left: 0; /* Remove left margin */
-    margin-top: 10px; /* Add margin top for smaller screens */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 768px) { /* Adjust breakpoint as needed */
+/* XP & Coins */
+.xp-coins {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Profile Icon */
+.profile-icon {
+    font-size: 20px;
+    padding: 6px 12px;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+}
+
+.profile-icon:hover {
+    background-color: #f0f0f0;
+}
+
+/* ===== Responsive Navbar (For Tablets & Mobile) ===== */
+@media (max-width: 992px) {
+    .navbar {
+        margin-left: 0; /* Sidebar hidden, so navbar spans full width */
+        width: 100%;
+    }
+
+    /* Navbar container adjustments */
+    .navbar .container-fluid {
+        flex-direction: row;  /* Keep navbar items in a row */
+        align-items: center;
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Show Sidebar Toggle Button */
+    .navbar-toggler {
+        display: block;
+        font-size: 24px;
+        border: none;
+        background: none;
+    }
+
+    /* Full-width search bar on small screens */
     .navbar .input-group {
-        order: 2; /* Place search bar after the hamburger menu */
-        width: 100%; /* Make search bar full width */
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 10px;
     }
+
+    /* Hide XP, Coins, and Profile on Small Screens */
     .navbar .d-flex {
-        order: 3; /* Place XP, coins, and profile after search bar */
-        justify-content: center; /* Center the items */
-        width: 100%; /* Make them full width */
-    }
-    .navbar-expand-lg .navbar-toggler {
-        margin-right: auto; /* Move the toggler to the left */
+        display: none !important;
     }
 }
+
+/* ===== Adjustments for Very Small Screens (Phones) ===== */
+@media (max-width: 768px) {
+    .navbar .input-group {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
 /* Responsive - Hamburger */
 .hamburger {
     display: none;
@@ -120,8 +181,9 @@
     .hamburger {
         display: block;
         position: absolute;
-        top: 20px;
-        left: 20px;
+        left: 15px; /* Ensures it's fully left-aligned */
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .navbar {
