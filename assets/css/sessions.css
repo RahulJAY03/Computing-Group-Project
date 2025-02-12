@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+.sessions-container {
+    margin-left: 320px; /* Push content to the right */
+    padding: 30px;
+    max-width: calc(100% - 320px); /* Prevents overflow */
+}
+
+h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 250px)); /* Shorter cards */
+    gap: 10px;
+    justify-content: flex-start; /* Align to the left */
+}
+
+.session-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to the left */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push content to top and button to bottom */
+    min-height: 160px; /* Adjust height to maintain structure */
+    position: relative; /* Needed to position button properly */
+}
+
+.session-card p {
+    margin: 5px 0;
+}
+
+.join-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Adjust padding for better size */
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15px;  
+    right: 15px;   
+    width: 100px;  /* Adjust this to increase width */
+    text-align: center; /* Ensure text stays centered */
+}
+
+.join-btn:hover {
+    background-color: #218838;
+}

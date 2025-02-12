@@ -6,21 +6,23 @@
             <img src="../assets/images/The Kuppiya 1.png" alt="Logo" class="img-fluid">
         </div>
 
-        <!-- Sidebar Menu -->
-        <div class="nav flex-column gap-3" style="font-size: 18px;">
-            <a href="#" class="nav-link text-black active">
-                <i class="bi bi-house-door me-2"></i> Dashboard
-            </a>
-            <a href="#" class="nav-link text-black">
-                <i class="bi bi-grid me-2"></i> Modules
-            </a>
-            <a href="#" class="nav-link text-black">
-                <i class="bi bi-clock me-2"></i> Sessions
-            </a>
-            <a href="#" class="nav-link text-black">
-                <i class="bi bi-trophy me-2"></i> Leaderboard
-            </a>
-        </div>
+      
+        <!-- Sidebar Menu (Large screen) -->
+<div class="nav flex-column gap-3" style="font-size: 18px;">
+    <a href="index.php" class="nav-link text-black active">
+        <i class="bi bi-house-door me-2"></i> Dashboard
+    </a>
+    <a href="modules.php" class="nav-link text-black">
+        <i class="bi bi-grid me-2"></i> Modules
+    </a>
+    <a href="sessions.php" class="nav-link text-black">
+        <i class="bi bi-clock me-2"></i> Sessions
+    </a>
+    <a href="leaderboard.php" class="nav-link text-black">
+        <i class="bi bi-trophy me-2"></i> Leaderboard
+    </a>
+</div>
+
 
         <!-- Add Button -->
         <button class="btn btn-success mt-5 w-100"
@@ -47,19 +49,20 @@
 
         <!-- Sidebar Menu -->
         <div class="nav flex-column gap-3" style="font-size: 18px;">
-            <a href="#" class="nav-link text-black active">
+            <a href="index.php" class="nav-link text-black">
                 <i class="bi bi-house-door me-2"></i> Dashboard
             </a>
-            <a href="#" class="nav-link text-black">
+            <a href="modules.php" class="nav-link text-black">
                 <i class="bi bi-grid me-2"></i> Modules
             </a>
-            <a href="#" class="nav-link text-black">
+            <a href="sessions.php" class="nav-link text-black">
                 <i class="bi bi-clock me-2"></i> Sessions
             </a>
-            <a href="#" class="nav-link text-black">
+            <a href="leaderboard.php" class="nav-link text-black">
                 <i class="bi bi-trophy me-2"></i> Leaderboard
             </a>
         </div>
+
 
         <!-- Add Button -->
         <button class="btn btn-success mt-5 w-100"
