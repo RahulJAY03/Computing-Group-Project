@@ -1,16 +1,14 @@
 .sidebar {
-    width: 323px;
-    height: 100vh;
-    background: #f8f9fa; /* Light background */
-    padding: 20px;
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 1050; /* Increase z-index to ensure it's above everything */
-    transition: transform 0.3s ease;
-   
-    opacity: 1 !important; /* Ensure the sidebar is fully visible */
+    width: 250px; /* Adjust as needed */
+    height: 100vh; /* Full height */
+    background-color: white; /* Ensure visibility */
+    z-index: 1000; /* Keep it on top */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
+
 
 
 /* Logo */

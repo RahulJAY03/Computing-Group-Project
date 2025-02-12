@@ -25,5 +25,18 @@
 
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(event) {
+        let href = this.getAttribute('href');
+        if (href !== '#' && href) {
+            window.location.href = href;
+        }
+    });
+});
+</script>
+
+
 </body>
 </html>
