@@ -19,7 +19,7 @@
     ?>
     
     <div class="content">
-       
+      
     </div>
     <script src="../assets/js/script.js"></script>
 
