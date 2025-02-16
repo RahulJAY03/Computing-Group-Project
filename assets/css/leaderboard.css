@@ -1,0 +1,192 @@
+/* ===== General Styles ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f7;
+}
+
+.leaderboard-container {
+    padding: 30px;
+    margin-left: 300px;
+    margin-right: auto;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease-in-out;
+    width: calc(100% - 300px);
+}
+
+/* ===== Heading ===== */
+.leaderboard-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* ===== Leaderboard Table ===== */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid #e1e5ea;
+}
+
+.leaderboard-table th {
+    background-color: #f0f2f5;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.leaderboard-table tbody tr:hover {
+    background-color: #f9fafc;
+    cursor: pointer;
+}
+
+/* ===== Progress Bar ===== */
+.progress {
+    height: 12px;
+    border-radius: 6px;
+}
+
+.progress-xp {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+/* ===== Rank Badges ===== */
+.rank-badge {
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+}
+
+.gold-rank {
+    background-color: gold;
+}
+
+.silver-rank {
+    background-color: silver;
+}
+
+.bronze-rank {
+    background-color: #cd7f32;
+}
+
+/* ===== League & Achievements Cards ===== */
+.league-card, .achievements-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    transition: transform 0.2s;
+}
+
+.league-card:hover, .achievements-card:hover {
+    transform: translateY(-5px);
+}
+
+.league-card i, .achievements-card i {
+    margin-right: 12px;
+    font-size: 20px;
+    color: #3498db;
+}
+
+/* ===== Challenge Button ===== */
+.challenge-btn {
+    background-color: #74E685;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.challenge-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* Centered icon items */
+.horizontal-icons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-item i {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.icon-item span {
+    font-weight: 500;
+    color: #333;
+}
+
+/* Horizontal cards for League & Achievements */
+/* Horizontal cards for League & Achievements */
+.horizontal-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.horizontal-cards .card {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ===== Responsive Adjustments ===== */
+
+
+@media (max-width: 992px) {
+    .leaderboard-container {
+        margin-left: 0;
+        width: 100%; /* Take full width on smaller screens */
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .leaderboard-container {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-container {
+        width: 100%;
+        padding: 10px;
+    }
+}

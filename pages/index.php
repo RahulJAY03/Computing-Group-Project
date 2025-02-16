@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <!-- Add Bootstrap Icons CDN link -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/leaderboard.css">
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- Custom Styles -->
 
     
