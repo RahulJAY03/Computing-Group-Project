@@ -23,12 +23,13 @@
         </div>
 
         <!-- Add Button -->
-        <button class="btn btn-success mt-5 w-100"
-            style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
-            onmouseover="this.style.backgroundColor='#62d677'" 
-            onmouseout="this.style.backgroundColor='#74E685'">
-            + Add
-        </button>
+        <a href="addnote1.php" class="btn btn-success mt-5 w-100" 
+   style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
+   onmouseover="this.style.backgroundColor='#62d677'" 
+   onmouseout="this.style.backgroundColor='#74E685'">
+    + Add
+</a>
+
     </div>
 </div>
 

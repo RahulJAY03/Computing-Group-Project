@@ -11,12 +11,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center; 
-    margin-right: 13%;
-    margin-left: 23%;
-    margin-top: 2%;
+    margin: 2% 0 2% 330px; /* Left margin for larger screens */
     min-height: 400px; 
 }
-
 
 h2 {
     font-weight: bold;
@@ -106,4 +103,13 @@ p {
 
 .browse-btn:hover {
     background-color: #45a049;
+}
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .green_center_box {
+        margin: 2% 0; /* Remove the left margin on smaller screens */
+        width: 100%;
+        border-radius: 0;
+    }
 }
