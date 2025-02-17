@@ -13,7 +13,10 @@
         <div class="d-flex align-items-center">
             <span class="me-2" style="font-size: 18px;">780XP</span>
             <span class="me-2" style="font-size: 18px;">🪙 19</span>
-            <span class="profile-icon" style="font-size: 25px;">⚫</span>
+            <a href="userprofile.php">
+            <img src="../assets/images/profile.jpg" alt="Profile" class="profile-icon">
+            </a>
         </div>
+
     </div>
 </nav>

@@ -23,13 +23,13 @@
     <div class="container">
         <header>
             <div class="profile">
-                <img src="/assets/images/girl.png" alt="User Avatar">
+                <img src="../assets/images/girl.png" alt="User Avatar">
                 <h1> Sarali Balasinghe </h1>
             </div>
             <div class="settings">
-                <button class="reward-btn"> <img src="/assets/images/money.png"> Get Rewards </button>
-                <button class="settings-btn"> <img src="/assets/images/arrow.png"> </button>
-                <button class="settings-btn"> <img src="/assets/images/settings (1).png"> </button>
+                <button class="reward-btn"> <img src="../assets/images/money.png"> Get Rewards </button>
+                <button class="settings-btn"> <img src="../assets/images/arrow.png"> </button>
+                <button class="settings-btn"> <img src="../assets/images/settings (1).png"> </button>
             </div>
         </header>
 
@@ -38,15 +38,15 @@
                 <h2>My Studies</h2>
                 <div class="study-details">
                     <div class="study-item">
-                        <img src="/assets/images/university-of-milan.png" alt="User Avatar">
+                        <img src="../assets/images/university-of-milan.png" alt="User Avatar">
                         <p>University of Plymouth</p>
                     </div>
                     <div class="study-item">
-                        <img src="/assets/images/graduating-student.png" alt="User Avatar">
+                        <img src="../assets/images/graduating-student.png" alt="User Avatar">
                         <p>Software Engineering - Bachelor's Degree</p>
                     </div>
                     <div class="study-item">
-                         <img src="/assets/images/calendar.png" alt="User Avatar">
+                         <img src="../assets/images/calendar.png" alt="User Avatar">
                         <p>2023 - 2026</p>
                     </div>
                 </div>
@@ -55,11 +55,11 @@
                 <h2>My Stats</h2>
                 <div class="stat-details">
                     <div class="stat-item">
-                        <img src="/assets/images/earn.png" alt="User Avatar">
+                        <img src="../assets/images/earn.png" alt="User Avatar">
                         <p>Credit Points: 0</p>
                     </div>
                     <div class="stat-item">
-                        <img src="/assets/images/inbox.png" alt="User Avatar">
+                        <img src="../assets/images/inbox.png" alt="User Avatar">
                         <p>Downloads/Views: 0</p>
                     </div>
                 </div>
