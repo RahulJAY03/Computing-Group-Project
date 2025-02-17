@@ -1,0 +1,164 @@
+.content {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    margin: 3%;
+    padding: 0;
+}
+
+.button-success {
+    background-color: #74E685;
+    border: none;
+    color: black;
+    font-weight: bold;
+    max-width: 25%;
+    border-radius: 35px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button-success :hover{
+    background-color: #088E1C;
+}
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.main-content h2 {
+    margin-bottom: 2%;
+}
+
+.container{
+    margin-top: 5%;
+}
+
+
+
+.file-drop {
+    border-radius: 28px;
+    padding: 40px;
+    background-color: #C9ECCE;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-drop:hover {
+    background-color: #d6efda;
+}
+
+.file-info {
+    font-size: 12px;
+    color: #666;
+}
+
+.file-name{
+    color: #088E1C;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+
+}
+
+.form-container {
+    background-color: #C9ECCE;
+    padding: 20px;
+    border-radius: 28px;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+
+.trashicon {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: 5px; /* Adjust as needed */
+}
+
+
+
+
+/* Container to align the progress bar */
+/* Align the progress container to the top-right */
+.progress-container {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: center;
+    gap: 100%; /* Adjust spacing between steps */
+    position: absolute;
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    margin-top: 12%; /* Adjust spacing from the top */
+    margin-right: 10%; /* Adjust spacing from the right */
+    width: fit-content;
+}
+
+
+/* Style for each step */
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Circle styling */
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    z-index: 1;
+}
+
+/* Line between steps */
+.step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    width: 12rem; /* Adjust line width */
+    height: 3px;
+    background-color: #ccc;
+    top: 20%; /* Align line to the center */
+    left: 100%;
+    right: 100%;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+/* Completed step styling */
+.completed .circle {
+    background-color: #6cbe6c;
+    color: white;
+}
+
+.completed .circle::before {
+    content: "\2713"; /* Unicode for checkmark */
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Text under each step */
+.step p {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+
+
