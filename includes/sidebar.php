@@ -6,23 +6,21 @@
             <img src="../assets/images/The Kuppiya 1.png" alt="Logo" class="img-fluid">
         </div>
 
-      
         <!-- Sidebar Menu (Large screen) -->
-<div class="nav flex-column gap-3" style="font-size: 18px;">
-    <a href="index.php" class="nav-link text-black active">
-        <i class="bi bi-house-door me-2"></i> Dashboard
-    </a>
-    <a href="modules.php" class="nav-link text-black">
-        <i class="bi bi-grid me-2"></i> Modules
-    </a>
-    <a href="sessions.php" class="nav-link text-black">
-        <i class="bi bi-clock me-2"></i> Sessions
-    </a>
-    <a href="leaderboard.php" class="nav-link text-black">
-        <i class="bi bi-trophy me-2"></i> Leaderboard
-    </a>
-</div>
-
+        <div class="nav flex-column gap-3" style="font-size: 18px;">
+            <a href="index.php" class="nav-link text-black active">
+                <i class="bi bi-house-door me-2"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link text-black" id="openModulesSidebar">
+                <i class="bi bi-grid me-2"></i> Modules
+            </a>
+            <a href="sessions.php" class="nav-link text-black">
+                <i class="bi bi-clock me-2"></i> Sessions
+            </a>
+            <a href="leaderboard.php" class="nav-link text-black">
+                <i class="bi bi-trophy me-2"></i> Leaderboard
+            </a>
+        </div>
 
         <!-- Add Button -->
         <button class="btn btn-success mt-5 w-100"
@@ -37,7 +35,6 @@
 <!-- Sidebar - Offcanvas for smaller screens -->
 <div class="offcanvas offcanvas-start bg-light text-black" tabindex="-1" id="sidebarMenu">
     <div class="offcanvas-header">
-        <!-- Close Button -->
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
     </div>
     
@@ -52,7 +49,7 @@
             <a href="index.php" class="nav-link text-black">
                 <i class="bi bi-house-door me-2"></i> Dashboard
             </a>
-            <a href="modules.php" class="nav-link text-black">
+            <a href="#" class="nav-link text-black" id="openModulesSidebarMobile">
                 <i class="bi bi-grid me-2"></i> Modules
             </a>
             <a href="sessions.php" class="nav-link text-black">
@@ -63,7 +60,6 @@
             </a>
         </div>
 
-
         <!-- Add Button -->
         <button class="btn btn-success mt-5 w-100"
             style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
@@ -73,3 +69,22 @@
         </button>
     </div>
 </div>
+
+<!-- Modules Sidebar (Sliding from Left) -->
+<div id="modulesSidebar" class="modules-sidebar">
+    <div class="modules-header">
+        <h5>Select a Category</h5>
+        <button class="btn-close" id="closeModulesSidebar"></button>
+    </div>
+    <div class="modules-body">
+        <form>
+            <label for="categorySelect" class="form-label">Choose a category:</label>
+            <select class="form-select" id="categorySelect">
+                <option value="IT">IT</option>
+                <option value="Business">Business</option>
+                <option value="Science">Science</option>
+            </select>
+        </form>
+    </div>
+</div>
+
