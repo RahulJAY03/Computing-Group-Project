@@ -1,0 +1,109 @@
+.green_center_box {
+    background-color: #C9ECCE;
+    width: 80%;
+    max-width: 1000px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; 
+    margin-right: 13%;
+    margin-left: 23%;
+    margin-top: 2%;
+    min-height: 400px; 
+}
+
+
+h2 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+h6 {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+}
+
+h6 img {
+    width: 20px;
+    vertical-align: middle;
+}
+
+.steps {
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background-color:#C9ECCE;
+    border-radius: 50%;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+p {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+}
+
+.file-drop {
+    border-radius: 10px;
+    padding: 40px;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    background-color:#C9ECCE;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-drop:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.upload-icon {
+    font-size: 40px;
+    color: gray;
+}
+
+.file-info {
+    font-size: 12px;
+    color: #666;
+}
+
+.browse-btn {
+    background-color: #6EEB81;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.browse-btn:hover {
+    background-color: #45a049;
+}
