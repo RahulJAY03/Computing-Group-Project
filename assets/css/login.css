@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #d4edda;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    width: 400px;
+    text-align: center;
+}
+.social-btn {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Adjust spacing */
+    align-items: center;
+    background: none; /* Remove white background */
+    border: none; /* Remove button border */
+    padding: 0; /* Remove extra padding */
+}
+
+.social-btn img {
+    width: 40px; /* Make the icon smaller */
+    height: 40px;
+    border-radius: 50%; /* Curve the icons */
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-btn img:hover {
+    transform: scale(1.1);
+}
