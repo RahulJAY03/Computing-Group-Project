@@ -22,7 +22,7 @@
     background-color: #088E1C;
 }
 .main-content {
-    margin-left: 320px;
+    margin-left: 220px;
     padding: 20px;
 }
 
@@ -80,14 +80,13 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    margin-top: 5px; /* Adjust as needed */
+    margin-top: 5px; 
 }
 
 
 
 
 /* Container to align the progress bar */
-/* Align the progress container to the top-right */
 .progress-container {
     display: flex;
     justify-content: flex-end; /* Align to the right */
@@ -162,3 +161,77 @@
 }
 
 
+/* Media Queries for Responsive Design */
+@media (max-width: 1100px) {
+    .button-success {
+        max-width: 100%; /* Full width on smaller screens */
+        padding: 10px; /* Adjusted padding */
+    }
+
+    .main-content {
+        margin-left: 0; /* Remove left margin on smaller screens */
+    }
+
+    .progress-container {
+        display: flex;
+        justify-content: flex-end; /* Align to the right */
+        align-items: center;
+        gap: 40%; /* Adjust spacing between steps */
+        position: absolute;
+        top: 0; /* Align to the top */
+        right: 0; /* Align to the right */
+        margin-top: 17%; /* Adjust spacing from the top */
+        margin-right: 10%; /* Adjust spacing from the right */
+        width: fit-content;
+    }
+
+    .step:not(:last-child)::after {
+        display: none;
+    }
+
+    .step p {
+        font-size: 10px; /* Adjusted font size */
+    }
+}
+
+@media (max-width: 800px) {
+    .button-success {
+        max-width: 100%; /* Full width on smaller screens */
+        padding: 10px; /* Adjusted padding */
+    }
+
+    .main-content {
+        margin-left: 0; /* Remove left margin on smaller screens */
+    }
+
+    .progress-container {
+        display: flex;
+        justify-content: flex-end; /* Align to the right */
+        align-items: center;
+        gap: 40%; /* Adjust spacing between steps */
+        position: absolute;
+        top: 0; /* Align to the top */
+        right: 0; /* Align to the right */
+        margin-top: 17%; /* Adjust spacing from the top */
+        margin-right: 10%; /* Adjust spacing from the right */
+        width: fit-content;
+    }
+
+    .response{
+        margin-top: 25px;
+    }
+    .step:not(:last-child)::after {
+        display: none;
+    }
+
+    .step p {
+        font-size: 10px; /* Adjusted font size */
+    }
+}
+
+@media (max-width: 650px) {
+    .progress-container {
+       display: none;
+    }
+    
+}
