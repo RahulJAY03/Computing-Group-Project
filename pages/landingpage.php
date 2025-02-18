@@ -14,77 +14,171 @@
     <title>sessions</title>
 </head>
 <body>
+   
+     <!-- Navbar -->
+     <div class="navbar">
+        <div class="logo"><img src="../assets/images/The Kuppiya 1.png" alt="Access Notes"></div>
+        <div class="nav-links">
+            <a href="#" class="login-btn">Login</a>
+            <a href="#" class="signup-btn" onclick="openSignup()">Sign up for free</a>
 
-    
-    <header class="navbar">
-        <div class="logo">THE EDUHUB</div>
-        <nav>
-            <button class="Login">Login</button>
-            <button class="signup">Sign up for free</button>
-        </nav>
-    </header>
-    
-    <section class="hero">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="Main-container">
         <h1>Free study notes, summaries & answers for your studies</h1>
         <p>Study easier, faster & better.</p>
-        <button class="cta">Get Started</button>
-    </section>
-    
-    <section class="features">
+        <a href="#" class="cta-btn">Get Started</a>
+    </div>
+
+    <div class="what-container">
         <h2>What We Offer ?</h2>
-        <div class="feature-container">
+        <div class="features">
             <div class="feature">
+                <img src="https://img.icons8.com/ios-filled/100/000000/note.png" alt="Access Notes">
                 <h3>Access Notes</h3>
-                <p>Get high-quality study material shared by peers and experts.</p>
+                <p>Get high-quality study materials shared by peers and experts</p>
             </div>
             <div class="feature">
+                <img src="https://img.icons8.com/ios-filled/100/000000/video-conference.png" alt="Join Live Sessions">
                 <h3>Join Live Sessions</h3>
-                <p>Attend scheduled Zoom meetings to discuss topics in real-time.</p>
+                <p>Attend scheduled Zoom meetings for various subjects and discuss topics in real-time</p>
             </div>
             <div class="feature">
+                <img src="https://img.icons8.com/ios-filled/100/000000/collaboration.png" alt="Share & Collaborate">
                 <h3>Share & Collaborate</h3>
-                <p>Upload your own notes & contribute to the community.</p>
+                <p>Upload your own notes and contribute to the community</p>
             </div>
         </div>
-    </section>
+    </div>
+
     
-    <section class="why-us">
-        <h2>Why Study With Us ?</h2>
-        <ul>
-            <li>✔ Updated Resources</li>
-            <li>✔ Interactive Learning</li>
-            <li>✔ Student-Driven</li>
-            <li>✔ Seamless Accessibility</li>
-        </ul>
-        <button class="signup">Sign up for free</button>
-    </section>
+
+    <div class="why-container">
+        <div class="text-section">
+            <h2>Why Study With Us ?</h2>
+            <ul class="list">
+                <li><span>📌</span>Updated Resources</li>
+                <li><span>📌</span>Interactive Learning</li>
+                <li><span>📌</span>Student-Driven</li>
+                <li><span>📌</span>Seamless Accessibility</li>
+            </ul>
+        </div>
+        <div class="image-section">
+            <img src="../assets/images/why study.png.png" alt="Online Learning Illustration">
+        </div>
+        <a href="#" class="signup-btn1" onclick="openSignup()">Sign up for free</a>
+
+    </div>
     
-    <section class="testimonials">
+
+    <div class="testimonials">
         <h2>What Our Students Say ?</h2>
         <div class="testimonial-container">
             <div class="testimonial">
-                <p>"This platform has been a lifesaver for my studies!"</p>
-                <h4>Amanda</h4>
-                <span>University Student</span>
+                <img src="../assets/images/p1.png" alt="Amanda">
+                <h3>Amanda De Silva</h3>
+                <p>This platform has been a lifesaver! Finding well-organized notes and joining live discussions has made studying easier.</p>
+                <span>(Business Student)</span>
             </div>
             <div class="testimonial">
-                <p>"Interactive learning and amazing resources."</p>
-                <h4>Arvin</h4>
-                <span>High School Student</span>
+                <img src="../assets/images/p2.png" alt="Arvin">
+                <h3>Arvin Perera</h3>
+                <p>It's great to have a student-driven platform to share knowledge and help each other out. Highly recommend it!</p>
+                <span>(Cyber Security Student)</span>
             </div>
             <div class="testimonial">
-                <p>"Engaging and informative!"</p>
-                <h4>Julie</h4>
-                <span>Engineering Student</span>
+                <img src="../assets/images/p3.png" alt="Rahul">
+                <h3>Rahul Jay</h3>
+                <p>I love how interactive the Zoom sessions are. It feels like a real classroom, and I can clear my doubts instantly.</p>
+                <span>(Software Eng. Student)</span>
+            </div>
+            <div class="testimonial">
+                <img src="../assets/images/p4.png" alt="Julia">
+                <h3>Julia Spencer</h3>
+                <p>As someone who struggles with last-minute cramming, having access to shared notes and recorded sessions has been a huge help.</p>
+                <span>(Engineering Student)</span>
             </div>
         </div>
-        <button class="signup">Sign up for free</button>
-    </section>
+    </div>
+    <button class="signup-btn2" onclick="openSignup()">Sign up for free</button>
+
+
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="../assets/images/The Kuppiya 1.png" alt="The Kuppiya">
+        </div>
+        <div class="footer-text">
+            Copyright &copy; 2022 BRIX Templates | All Rights Reserved
+        </div>
+    </footer>
 
     <script src="../assets/js/script.js"></script>
 
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<!-- Signup Popup Modal -->
+<div id="signupModal" class="signup-modal">
+    <div class="signup-modal-content">
+        <span class="close-btn" onclick="closeSignup()">&times;</span>
+        <h2>Sign Up</h2>
+        <div class="input-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+        <button class="signup-submit-btn" onclick="signUp()">Sign Up</button>
+
+        <p>or sign up with</p>
+        <div class="social-login">
+            <a href="https://accounts.google.com/signup" target="_blank">
+                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+            </a>
+            <a href="https://appleid.apple.com/sign-in" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Open modal
+    function openSignup() {
+        document.getElementById('signupModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeSignup() {
+        document.getElementById('signupModal').style.display = 'none';
+    }
+
+    // Signup simulation
+    function signUp() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        if (email && password) {
+            alert(`Signup successful! Welcome, ${email}`);
+            closeSignup();
+        } else {
+            alert('Please fill out both fields.');
+        }
+    }
+
+    // Close modal on outside click
+    window.onclick = function (event) {
+        const modal = document.getElementById('signupModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+
 
 
 </body>
