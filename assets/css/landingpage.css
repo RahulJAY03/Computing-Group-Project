@@ -544,3 +544,48 @@ body {
     font-weight:lighter;
     color: #055411;
 }
+#signupPopup, #loginPopup {
+    display: none;
+}
+.checkbox-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.forgot-password {
+    margin-left: auto;
+    text-decoration: none;
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+#loginPopup .popup-container {
+    max-height: 585px; /* Adjust this value as needed */
+    height: auto;
+}
+.signup-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.popup-right .input-group {
+    margin-bottom: 2px !important; /* Force override */
+}
+
+.popup-right .center-text {
+    margin-top: 10px !important; /* Reduce margin above the text */
+    margin-bottom: 5px !important; /* Reduce margin below the text */
+}
+

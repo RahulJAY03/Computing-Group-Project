@@ -19,7 +19,8 @@
      <div class="navbar">
         <div class="logo"><img src="../assets/images/The Kuppiya 1.png" alt="Access Notes"></div>
         <div class="nav-links">
-            <a href="#" class="login-btn">Login</a>
+        <a href="#" class="login-btn" onclick="openLogin()">Login</a>
+
             <a href="#" class="signup-btn" onclick="openSignup()">Sign up for free</a>
 
         </div>
@@ -29,7 +30,9 @@
     <div class="Main-container">
         <h1>Free study notes, summaries & answers for your studies</h1>
         <p>Study easier, faster & better.</p>
-        <a href="#" class="cta-btn">Get Started</a>
+        
+        <a href="#" class="cta-btn" onclick="openLogin()">Get Started</a>
+
     </div>
 
     <div class="what-container">
@@ -119,8 +122,8 @@
 
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<!-- Popup Overlay -->
-<div class="popup-overlay" id="popup">
+<!-- Signup Popup -->
+<div class="popup-overlay" id="signupPopup">
     <div class="popup-container">
         <!-- Left Side: Message -->
         <div class="popup-left">
@@ -130,9 +133,7 @@
 
         <!-- Right Side: Signup Form -->
         <div class="popup-right">
-            <!-- Close Button Inside Form -->
-            <span class="close-btn" onclick="closePopup()">&#10006;</span>
-
+            <span class="close-btn" onclick="closePopup('signupPopup')">&#10006;</span>
             <h2>Signup</h2>
             <div class="input-group">
                 <label for="email">Email address</label>
@@ -157,44 +158,78 @@
     </div>
 </div>
 
+<!-- Login Popup -->
+<div class="popup-overlay" id="loginPopup">
+    <div class="popup-container">
+        <!-- Left Side: Message -->
+        <div class="popup-left">
+            <h1>Welcome back</h1>
+            <p>Login to access your documents, groups, questions, and answers.</p>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="popup-right">
+            <span class="close-btn" onclick="closePopup('loginPopup')">&#10006;</span>
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="login-email">Email address</label>
+                <input type="email" id="login-email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+            </div>
+            <div class="checkbox-group">
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+                </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+            <button class="signup-btn" onclick="login()">Login</button>
+            <p class="center-text">
+    No account? 
+    <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a>
+</p>
+
+
+            <p class="center-text">Or login with</p>
+            <div class="social-login">
+                <a href="https://accounts.google.com/signup" target="_blank">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+                </a>
+                <a href="https://appleid.apple.com/sign-in" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 <script>
-   // Open modal
 function openSignup() {
-    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('signupPopup').style.display = 'flex';
 }
 
-
-    // Close modal
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
+function openLogin() {
+    document.getElementById('loginPopup').style.display = 'flex';
 }
 
+function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+}
 
-    // Signup simulation
-    function signUp() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        if (email && password) {
-            alert(`Signup successful! Welcome, ${email}`);
-            closeSignup();
-        } else {
-            alert('Please fill out both fields.');
-        }
-    }
+function signUp() {
+    alert('Signup button clicked!');
+}
 
-    // Close modal on outside click
-    window.onclick = function (event) {
-        const modal = document.getElementById('signupModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    }
+function login() {
+    alert('Login button clicked!');
+}
 </script>
-
-
 
 </body>
 </html>
