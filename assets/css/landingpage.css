@@ -328,7 +328,7 @@ body {
     font-size: 14px;
     color: #666;
 }
-
+/* Signup Modal Styles */
 /* Signup Modal Styles */
 .signup-modal {
     display: none;
@@ -371,6 +371,7 @@ body {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
 }
 
 .input-group input {
@@ -379,8 +380,8 @@ body {
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 14px;
+    box-sizing: border-box;
 }
-
 .signup-submit-btn {
     margin-top: 15px;
     padding: 12px;
@@ -409,7 +410,15 @@ body {
     width: 40px;
     height: auto;
     cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
+/* Hover effect: scale and shadow */
+.social-login img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -422,4 +431,116 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Updated Popup with Split Layout */
+.popup-container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    min-height: 500px; /* Increased height */
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    margin-top: 100px;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Left Section with Message */
+.popup-left {
+    flex: 1;
+    background: #f0f4f7;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.popup-left h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #055411;
+}
+
+.popup-left p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+
+/* Right Section with Signup Form */
+.popup-right {
+    flex: 1;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 500px; /* Increased height to match */
+}
+
+
+.popup-right h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popup-right input {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.popup-right button {
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    background-color: #74E685;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.popup-right button:hover {
+    background-color: #34c44a;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Center 'Or with' text */
+.popup-right p {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.popup-right h2 {
+    text-align: center;
+    margin: 20px 0;
+    font-weight:lighter;
+    color: #055411;
 }

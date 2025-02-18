@@ -119,44 +119,59 @@
 
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-<!-- Signup Popup Modal -->
-<div id="signupModal" class="signup-modal">
-    <div class="signup-modal-content">
-        <span class="close-btn" onclick="closeSignup()">&times;</span>
-        <h2>Sign Up</h2>
-        <div class="input-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" placeholder="Enter your email">
+<!-- Popup Overlay -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-container">
+        <!-- Left Side: Message -->
+        <div class="popup-left">
+            <h1>Study easier together</h1>
+            <p>Get access to all documents, groups, questions, and answers.</p>
         </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password">
-        </div>
-        <button class="signup-submit-btn" onclick="signUp()">Sign Up</button>
 
-        <p>or sign up with</p>
-        <div class="social-login">
-            <a href="https://accounts.google.com/signup" target="_blank">
-                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
-            </a>
-            <a href="https://appleid.apple.com/sign-in" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
-            </a>
+        <!-- Right Side: Signup Form -->
+        <div class="popup-right">
+            <!-- Close Button Inside Form -->
+            <span class="close-btn" onclick="closePopup()">&#10006;</span>
+
+            <h2>Signup</h2>
+            <div class="input-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button class="signup-btn" onclick="signUp()">Sign up for free</button>
+
+            <p>Or with</p>
+            <div class="social-login">
+                <a href="https://accounts.google.com/signup" target="_blank">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+                </a>
+                <a href="https://appleid.apple.com/sign-in" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
+
+
+
 <script>
-    // Open modal
-    function openSignup() {
-        document.getElementById('signupModal').style.display = 'flex';
-    }
+   // Open modal
+function openSignup() {
+    document.getElementById('popup').style.display = 'flex';
+}
+
 
     // Close modal
-    function closeSignup() {
-        document.getElementById('signupModal').style.display = 'none';
-    }
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
 
     // Signup simulation
     function signUp() {
