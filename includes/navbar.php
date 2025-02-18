@@ -10,13 +10,20 @@
             <input type="text" class="form-control" placeholder="Search Documents, Sessions">
         </div>
 
-        <div class="d-flex align-items-center">
-            <span class="me-2" style="font-size: 18px;">780XP</span>
-            <span class="me-2" style="font-size: 18px;">🪙 19</span>
-            <a href="userprofile.php">
-            <img src="../assets/images/profile.jpg" alt="Profile" class="profile-icon">
-            </a>
-        </div>
+        <!-- Updated Navbar with Profile Popup -->
+<div class="d-flex align-items-center" style="position: relative;">
+    <span class="me-2" style="font-size: 18px;">780XP</span>
+    <span class="me-2" style="font-size: 18px;">🪙 19</span>
+    <img src="../assets/images/profile.jpg" alt="Profile" class="profile-icon" onclick="toggleProfilePopup()">
+
+    <!-- Profile Popup Dropdown -->
+    <div class="profile-popup" id="profilePopup">
+        <a href="userprofile.php">My Profile</a>
+        <a href="settings.php">Settings</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</div>
 
     </div>
 </nav>
+

@@ -33,3 +33,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+function toggleProfilePopup() {
+    const popup = document.getElementById('profilePopup');
+    popup.classList.toggle('show');
+}
+
+document.addEventListener('click', function (event) {
+    const profileIcon = document.querySelector('.profile-icon');
+    const popup = document.getElementById('profilePopup');
+
+    if (!profileIcon.contains(event.target) && !popup.contains(event.target)) {
+        popup.classList.remove('show');
+    }
+});
+
+
+

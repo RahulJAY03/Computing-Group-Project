@@ -78,14 +78,10 @@
         <button class="btn-close" id="closeModulesSidebar"></button>
     </div>
     <div class="modules-body">
-        <form>
-            <label for="categorySelect" class="form-label">Choose a category:</label>
-            <select class="form-select" id="categorySelect">
-                <option value="IT">IT</option>
-                <option value="Business">Business</option>
-                <option value="Science">Science</option>
-            </select>
-        </form>
+    <button class="category-btn" onclick="window.location.href='module2.php'">IT</button>
+
+        <button class="category-btn">Business</button>
+        <button class="category-btn">Science</button>
     </div>
 </div>
 

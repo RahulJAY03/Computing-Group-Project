@@ -60,33 +60,26 @@
     background: #66d377;
 }
 
-/* Navbar */
+/* Updated CSS for Profile Popup */
 .navbar {
-    height: 80px; /* Maintains consistent height */
+    height: 80px;
     padding: 10px 20px;
     align-items: center;
-    margin-left: 250px; /* Keeps navbar aligned when sidebar is visible */
+    margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
     background-color: #fff;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* ===== Navbar Container ===== */
 .navbar .container-fluid {
     display: flex;
-    flex-wrap: wrap; /* Allows content to wrap properly */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
 
-/* ===== Sidebar Toggle Button (For Mobile) ===== */
-.navbar-toggler {
-    display: none;
-}
-
-/* ===== Search Bar ===== */
 .navbar .input-group {
-    flex-grow: 1; /* Allows the search bar to expand */
+    flex-grow: 1;
     max-width: 400px;
     transition: width 0.3s ease-in-out;
 }
@@ -96,20 +89,17 @@
     padding: 8px 12px;
 }
 
-/* ===== XP, Coins, and Profile Section ===== */
 .navbar .d-flex {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* XP & Coins */
 .xp-coins {
     font-size: 16px;
     font-weight: bold;
 }
 
-/* Profile Icon as Rounded Image */
 .profile-icon {
     width: 50px;
     height: 50px;
@@ -125,22 +115,51 @@
     border-color: #333;
 }
 
+.profile-popup {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+    z-index: 1000;
+}
 
-/* ===== Responsive Navbar (For Tablets & Mobile) ===== */
+.profile-popup a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+.profile-popup a:hover {
+    background-color: #C9ECCE;
+}
+
+.profile-popup a:last-child {
+    border-bottom: none;
+}
+
+.profile-popup.show {
+    display: flex;
+}
+
 @media (max-width: 992px) {
     .navbar {
-        margin-left: 0; /* Sidebar hidden, so navbar spans full width */
+        margin-left: 0;
         width: 100%;
     }
 
-    /* Navbar container adjustments */
     .navbar .container-fluid {
-        flex-direction: row;  /* Keep navbar items in a row */
+        flex-direction: row;
         align-items: center;
-        text-align: left; /* Align text to the left */
+        text-align: left;
     }
 
-    /* Show Sidebar Toggle Button */
     .navbar-toggler {
         display: block;
         font-size: 24px;
@@ -148,7 +167,6 @@
         background: none;
     }
 
-    /* Full-width search bar on small screens */
     .navbar .input-group {
         order: 2;
         width: 100%;
@@ -156,13 +174,11 @@
         margin-top: 10px;
     }
 
-    /* Hide XP, Coins, and Profile on Small Screens */
     .navbar .d-flex {
         display: none !important;
     }
 }
 
-/* ===== Adjustments for Very Small Screens (Phones) ===== */
 @media (max-width: 768px) {
     .navbar .input-group {
         width: 100%;
@@ -170,23 +186,21 @@
     }
 }
 
-/* Responsive - Hamburger */
 .hamburger {
     display: none;
     font-size: 24px;
     cursor: pointer;
 }
 
-/* Mobile View */
 @media (max-width: 992px) {
     .sidebar {
-        display: none; /* Hide the fixed sidebar on smaller screens */
+        display: none;
     }
 
     .hamburger {
         display: block;
         position: absolute;
-        left: 15px; /* Ensures it's fully left-aligned */
+        left: 15px;
         top: 50%;
         transform: translateY(-50%);
     }
@@ -195,7 +209,6 @@
         width: 100%;
     }
 }
-
 /* Sidebar Hover Effect */
 .nav-link {
     transition: background-color 0.3s ease, border-radius 0.3s ease;
@@ -247,14 +260,25 @@
 
 /* Modules Body */
 .modules-body {
-    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* Category Selection */
-.modules-body .form-select {
-    width: 100%;
+/* Category Buttons */
+.category-btn {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+}
+
+.category-btn:hover {
+    background-color: #C9ECCE;
 }
 
 /* Ensure Sidebar & Modules Sidebar Work Together */
