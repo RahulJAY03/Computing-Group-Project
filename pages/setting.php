@@ -67,15 +67,27 @@
         </div>
         
         <div class="section3">
-            <h3>Delete account</h3>
-            <p>Do you want to delete your ‘The Kuppiya’ account? We wish you all the best and hope to see you again soon</p>
-            <button class="delete-btn">Permanently delete account</button>
+            <h3>Delete Account</h3>
+            <p>Do you want to delete your ‘The Kuppiya’ account? We wish you all the best and hope to see you again soon.</p>
+            <button class="delete-btn" onclick="showModal()">Permanently Delete Account</button>
         </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure you want to delete your account?</h3>
+            <div class="modal-buttons">
+                <button class="modal-delete">Delete</button>
+                <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+            </div>
         </div>
+    </div>
+
     </div>
     
 
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/setting.js"></script>
 
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
