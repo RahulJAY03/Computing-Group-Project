@@ -589,3 +589,15 @@ body {
     margin-bottom: 5px !important; /* Reduce margin below the text */
 }
 
+#additionalSignupPopup .popup-container {
+    max-height: 610px; /* Adjust this value as needed */
+    height: auto;
+}
+
+#additionalSignupPopup .signup-btn {
+    margin-top: 2px;
+}
+
+#additionalSignupPopup h2 {
+    margin-bottom: 2px;
+}
