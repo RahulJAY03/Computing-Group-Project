@@ -207,6 +207,56 @@
     </div>
 </div>
 
+<!-- Additional Signup Details Popup -->
+<div class="popup-overlay" id="additionalSignupPopup">
+    <div class="popup-container">
+        <!-- Left Side: Message -->
+        <div class="popup-left">
+            <h1>Just a small step here :)</h1>
+        </div>
+
+        <!-- Right Side: Additional Signup Form -->
+        <div class="popup-right">
+            <span class="close-btn" onclick="closePopup('additionalSignupPopup')">&#10006;</span>
+            <h2>Complete Your Profile</h2>
+
+            <form id="additionalSignupForm">
+                <div class="input-group">
+                    <label for="username">Name</label>
+                    <input type="text" id="username" placeholder="Enter your name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="not_prefer">Prefer not to say</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="university">University</label>
+                    <input type="text" id="university" placeholder="Enter your university" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="study-programme">Study Programme</label>
+                    <input type="text" id="study-programme" placeholder="Enter your study programme" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="graduate-year">Graduate Year</label>
+                    <input type="date" id="graduate-year" required>
+                </div>
+
+                <button type="submit" class="signup-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 <script>
@@ -229,6 +279,28 @@ function signUp() {
 function login() {
     alert('Login button clicked!');
 }
+
+function openAdditionalSignupPopup() {
+    document.getElementById("additionalSignupPopup").style.display = "flex";
+}
+
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = "none";
+}
+
+// Modify Signup Button in Signup Popup to Open the Additional Signup Popup
+document.addEventListener("DOMContentLoaded", function () {
+    const signupButton = document.querySelector("#signupPopup .signup-btn");
+    
+    if (signupButton) {
+        signupButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent form submission (if needed)
+            closePopup("signupPopup"); // Close the first signup popup
+            openAdditionalSignupPopup(); // Open the new popup
+        });
+    }
+});
+
 </script>
 
 </body>
