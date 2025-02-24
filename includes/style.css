@@ -1,0 +1,309 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px; /* Adjust as needed */
+    height: 100vh; /* Full height */
+    background-color: white; /* Ensure visibility */
+    z-index: 1000; /* Keep it on top */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+/* Logo */
+.logo img {
+    width: 278px;
+    height: 62px;
+    border-radius: 18px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Menu */
+.menu {
+    margin-top: 30px;
+}
+
+.menu-item {
+    width: 250px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin: 10px auto;
+    cursor: pointer;
+    background: white;
+    transition: 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: #D8FFDE;
+}
+
+/* Add Button */
+.add-btn {
+    width: 250px;
+    height: 60px;
+    border-radius: 18px;
+    background: #74E685;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #66d377;
+}
+
+/* Updated CSS for Profile Popup */
+.navbar {
+    height: 80px;
+    padding: 10px 20px;
+    align-items: center;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .input-group {
+    flex-grow: 1;
+    max-width: 400px;
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar .input-group input {
+    border-radius: 20px;
+    padding: 8px 12px;
+}
+
+.navbar .d-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.xp-coins {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border: 2px solid #ddd;
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+    border-color: #333;
+}
+
+.profile-popup {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+    z-index: 1000;
+}
+
+.profile-popup a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+.profile-popup a:hover {
+    background-color: #C9ECCE;
+}
+
+.profile-popup a:last-child {
+    border-bottom: none;
+}
+
+.profile-popup.show {
+    display: flex;
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .navbar .container-fluid {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+    }
+
+    .navbar-toggler {
+        display: block;
+        font-size: 24px;
+        border: none;
+        background: none;
+    }
+
+    .navbar .input-group {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar .d-flex {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar .input-group {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .navbar {
+        width: 100%;
+    }
+}
+/* Sidebar Hover Effect */
+.nav-link {
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #D8FFDE;
+    border-radius: 10px;
+}
+
+/* Highlighted XP */
+.xp-highlight {
+    background-color: #FFD700; /* Gold/yellow background */
+    color: #333; /* Dark text for contrast */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+}
+
+/* Modules Sidebar */
+.modules-sidebar {
+    position: fixed;
+    left: 250px; /* Ensures it starts exactly after the sidebar */
+    top: 0;
+    width: 300px; /* Adjust width */
+    height: 100vh;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%); /* Initially hidden */
+    transition: transform 0.4s ease-in-out;
+    z-index: 1051; /* Ensure it's above the sidebar */
+    padding: 20px;
+    display: none; /* Hide initially to prevent flickering */
+}
+
+/* Show the Modules Sidebar AFTER Sidebar is Visible */
+.modules-sidebar.show {
+    display: block;
+    transform: translateX(0);
+}
+
+/* Header */
+.modules-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Close Button */
+.modules-header .btn-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Modules Body */
+.modules-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Category Buttons */
+.category-btn {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+}
+
+.category-btn:hover {
+    background-color: #C9ECCE;
+}
+
+/* Ensure Sidebar & Modules Sidebar Work Together */
+@media (max-width: 992px) {
+    .modules-sidebar {
+        left: 0; /* Full width on mobile */
+        width: 100%;
+    }
+
+    .sidebar {
+        display: none; /* Hide sidebar on smaller screens */
+    }
+}
+
