@@ -218,6 +218,20 @@
     background-color: #D8FFDE;
     border-radius: 10px;
 }
+
+/* Highlighted XP */
+.xp-highlight {
+    background-color: #FFD700; /* Gold/yellow background */
+    color: #333; /* Dark text for contrast */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+}
+
 /* Modules Sidebar */
 .modules-sidebar {
     position: fixed;
@@ -291,4 +305,17 @@
     .sidebar {
         display: none; /* Hide sidebar on smaller screens */
     }
+}
+
+/* Highlighted XP */
+.xp-highlight {
+    background-color: #FFD700; /* Gold/yellow background */
+    color: #333; /* Dark text for contrast */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
 }
