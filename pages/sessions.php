@@ -25,6 +25,11 @@
      <!-- Sidebar and Navbar (To be included from separate files) -->
      <main class="sessions-container">
 
+     <!-- Top Section with Button -->
+     <div class="sessions-header">
+        <button class="create-session-btn" onclick="window.location.href='createsessions.php'">Create a Session</button>
+    </div>
+
     <!-- Category Dropdown -->
     <div class="category-filter">
         <label for="category-select">Select a category:</label>

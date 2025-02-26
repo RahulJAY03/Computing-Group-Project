@@ -1,0 +1,444 @@
+/* Basic Setup */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    padding: 30px;
+    max-width: 80%;
+    margin-left: 300px;
+    margin-right: auto;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  /* Header Section */
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #95ebb2; 
+    border-radius: 12px;
+  }
+  .header-section h2 {
+    margin: 0;
+  }
+  .header-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  .header-buttons button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;  
+  }
+  .joined-btn {
+    background-color: #5cca76;
+    color: black;
+    font-size: 20px;
+    align-items: center;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 3px;
+    justify-content: center;
+  }
+  .add-doc-btn {
+    background-color: #95ebb2;
+    color: black;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+  }
+  .leave-btn {
+    background-color: #95ebb2;
+    color: black;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    font-size: 30px;
+  }
+  .share-btn {
+    background-color: #95ebb2;
+    color: black;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .header-buttons button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Tabs */
+  .tab-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    color: black;
+  }
+  .tab-btn::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgb(6, 6, 7);
+    transition: width 0.3s ease;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+  .tab-btn.active::after {
+    width: 100%;
+  }
+  
+  /* Tab Content & Animation */
+  .tab-content {
+    margin-top: 20px;
+  }
+  .hidden {
+    display: none;
+  }
+  .fade-in {
+    animation: fadeInUp 0.4s forwards ease-in-out;
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Create a Post */
+  .create-post {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .create-post h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .post-input-row {
+    display: flex;
+    align-items: center;
+    background-color: #d0fecc;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #d0fecc;
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  .post-input-row input {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+  }
+  .input-icons {
+    display: flex;
+    gap: 12px;
+    color: #aaa;
+  }
+  .input-icons i {
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 20px;
+  }
+  .input-icons i:hover {
+    color: #666;
+    transform: scale(1.1);
+  }
+  /* Send & Link Buttons */
+  .send-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 20px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .send-btn:hover {
+    color: #666;
+    transform: scale(1.1);
+  }
+  .link-btn {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .link-btn:hover {
+    color: #666;
+    transform: scale(1.1);
+  }
+  
+  /* Post Card */
+  .post-card {
+    background-color: #d0fecc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .post-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .post-user-info {
+    flex: 1;
+    margin-left: 10px;
+  }
+  .user-top-row {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .user-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .user-xp {
+    background-color: #f1f3ff;
+    color: #4a4aff;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+  .time-ago {
+    color: #777;
+    font-size: 0.85rem;
+  }
+  .user-bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+  .post-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .icon-btn:hover {
+    color: #666;
+    transform: scale(1.1);
+  }
+  .post-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  .post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .like-btn:hover {
+    color: #d91f1f;
+    transform: scale(1.05);
+  }
+  .comment-count {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a4aff;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+  }
+  .comment-count:hover {
+    color: #2b2bb8;
+    text-decoration: underline;
+  }
+  
+  /* Comments Section */
+  .comments-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+  .comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  .comment-body {
+    flex: 1;
+    margin-left: 10px;
+    background-color: #c3fcbe;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+  }
+  .comment-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .comment-author {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .comment-xp {
+    background-color: #e3f7e6;
+    color: #2e7d32;
+    font-weight: 500;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+  }
+  .comment-time {
+    color: #999;
+    font-size: 0.8rem;
+  }
+  .comment-text {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+  .comment-like {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 1rem;
+    color: #999;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .comment-like:hover {
+    color: #d91f1f;
+    transform: scale(1.1);
+  }
+  
+  /* Add a Comment */
+  .add-comment {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  .add-comment .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .comment-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
+  .comment-input-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+  }
+  .comment-input-wrapper .send-btn {
+    color: #888;
+    font-size: 1.2rem;
+  }
+  .comment-input-wrapper .send-btn:hover {
+    color: #666;
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 1024px) {
+    .container {
+      padding: 20px;
+    }
+    .header-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .header-section, .tab-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .header-buttons button {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 992px) {
+    .container {
+      margin-left: 0;
+      max-width: 100%;
+    }
+  }
+  

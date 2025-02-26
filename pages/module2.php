@@ -18,7 +18,7 @@
     <div class="container">
         <h2 class="page-title">IT Section Modules</h2>
         <div class="modules-grid">
-            <button class="module-item active" onclick="window.location.href='module3.php'">Database Management System</button>
+            <button class="module-item active" onclick="window.location.href='discussion_document.php'">Database Management System</button>
             <button class="module-item">Introduction to Computer Science</button>
             <button class="module-item">Programming in C</button>
             <button class="module-item">Computer Architecture</button>

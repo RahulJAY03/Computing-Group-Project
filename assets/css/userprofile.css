@@ -225,7 +225,7 @@ h2 {
 .menu-item span {
     flex-grow: 1;
     text-align: left;
-    font-style: italic;
+    font-style:normal;
     color: black;
 }
 
