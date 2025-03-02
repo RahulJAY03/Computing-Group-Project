@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <!-- Add Bootstrap Icons CDN link -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- Custom Styles -->
     <link rel="stylesheet" href="../assets/css/userprofile.css"> <!-- Custom Styles -->
 
@@ -27,9 +28,8 @@
                 <h1> Sarali Balasinghe </h1>
             </div>
             <div class="settings">
-                <button class="reward-btn"> <img src="../assets/images/money.png"> Get Rewards </button>
-                <button class="settings-btn"> <img src="../assets/images/arrow.png"> </button>
-                <button class="settings-btn"> <img src="../assets/images/settings (1).png"> </button>
+                <button class="settings-btn"> <i class="fas fa-cog"></i></button>
+                <button class="settings-btn"> <i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 

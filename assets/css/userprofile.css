@@ -57,12 +57,12 @@ header {
 
 .settings button {
     background: none;
-    color: rgb(218, 139, 49);
-    border: 2px solid rgb(218, 139, 49);
+    color: black;
+    border-color: 2px black;
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     transition: background 0.3s, transform 0.3s, border-color 0.3s;
     gap: 6px;
     min-width: 40px;
@@ -77,24 +77,11 @@ header {
 
 
 .settings button:hover {
-    background: rgb(218, 139, 49);
+    background: black;
     color: white;
-    border-color: rgb(180, 100, 30);
+    border-color: black;
     transform: scale(1.05);
 }
-
-.settings .reward-btn {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.settings .reward-btn img {
-    width: 20px; 
-}
-
 
 .info-section {
     display: flex;
