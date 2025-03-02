@@ -66,22 +66,64 @@
     background-color: #C9ECCE;
     padding: 20px;
     border-radius: 28px;
+    position: relative; /* Allow absolute positioning of trash icon */
 }
 
+/* Style for form controls (dropdowns and input fields) */
 .form-control {
     padding: 10px;
     font-size: 16px;
     color: #666;
+    width: 100%; /* Ensure dropdowns fill the column width */
 }
 
+/* Align 'Select a category' and 'Select a module name' with other dropdowns */
+.form-container .row .col-md-6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+/* Adjust margin between dropdowns for uniform spacing */
+.form-container .row {
+    margin-bottom: 10px;
+}
+
+/* Trash icon positioning */
 .trashicon {
-    float: right;
+    position: absolute;
+    top: 10px;  /* Move above 'Select a module name' */
+    right: 20px; /* Align to the right side */
     width: 20px;
     height: 20px;
     cursor: pointer;
-    margin-top: 5px; 
+    margin-top: 20px;
 }
+
+/* Center the Upload button */
+.button-success {
+    background-color: #6ef186;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-success:hover {
+    background-color: #218838;
+}
+
+/* Upload button icon adjustment */
+.button-success img {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
 
 
 

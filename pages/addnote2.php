@@ -66,24 +66,20 @@
                 <div class="col-md-8">
                     <div class="form-container">
                         <h5 class="file-name">Images.jpg</h5> <img  class="trashicon" src="../assets/images/Trash.png">
-                        <div class="d-flex gap-3">
-                            <label><input type="checkbox" id="anonymously"> Upload anonymously</label>
-                            <label><input type="checkbox" id= "self_created"> Self-created</label>
-                        </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                             <select class="form-control">
-                                <option>Select a module name</option>
+                                <option>Select a category</option>
                                 <option>database </option>
                             </select>
                     </div>
                             <div class="col-md-6">
                                 <select class="form-control">
-                                    <option>Select a category</option>
+                                    <option>Select a module name</option>
                                     <option>ICT</option>
                                 </select>
                             </div>
-                    </div>
+                </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <select class="form-control">

@@ -28,19 +28,7 @@
     <div class="header-section">
       <h2>
         Database Management System
-        <button class="joined-btn">Joined</button>
-        <button class="add-doc-btn">
-          <i class="bi bi-file-earmark-plus"></i>
-        </button>
       </h2>
-      <div class="header-buttons">
-        <button class="share-btn">
-          <i class="bi bi-share"></i>
-        </button>
-        <button class="leave-btn">
-          <i class="bi bi-box-arrow-right"></i>
-        </button>
-      </div>
     </div>
 
     <!-- Tabs -->
@@ -62,11 +50,15 @@
                   <h3><a href="#">IntroductionToDb.pdf</a></h3>
                   <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
                   <div class="document-actions">
-                      <button class="comment-btn"><i class="bi bi-chat-dots"></i> 2</button>
-                      <button class="star-btn"><i class="bi bi-star"></i> 5</button>
-                      <button class="download-btn"><i class="bi bi-download"></i> 10</button>
-                      <button class="view-btn"><i class="bi bi-eye"></i> View</button>
-                  </div>
+                    <div class="left">
+                        <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
+                    </div>
+                   <div class="right">
+                        <button class="download-btn"><i class="bi bi-download"></i></button>
+                        <button class="view-btn"><i class="bi bi-eye"></i> View</button>
+                    </div>
+                </div>
+
               </div>
           </div>
 
@@ -76,11 +68,15 @@
                   <h3><a href="#">IntroductionToDb.pdf</a></h3>
                   <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
                   <div class="document-actions">
-                      <button class="comment-btn"><i class="bi bi-chat-dots"></i> 2</button>
-                      <button class="star-btn"><i class="bi bi-star"></i> 5</button>
-                      <button class="download-btn"><i class="bi bi-download"></i> 10</button>
+                  <div class="left">
+                     <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
+                  </div>
+                  <div class="right">
+                     <button class="download-btn"><i class="bi bi-download"></i></button>
                       <button class="view-btn"><i class="bi bi-eye"></i> View</button>
                   </div>
+              </div>
+
               </div>
           </div>
 
@@ -90,11 +86,15 @@
                   <h3><a href="#">IntroductionToDb.pdf</a></h3>
                   <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
                   <div class="document-actions">
-                      <button class="comment-btn"><i class="bi bi-chat-dots"></i> 2</button>
-                      <button class="star-btn"><i class="bi bi-star"></i> 5</button>
-                      <button class="download-btn"><i class="bi bi-download"></i> 10</button>
-                      <button class="view-btn"><i class="bi bi-eye"></i> View</button>
+                      <div class="left">
+                          <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
+                     </div>
+                      <div class="right">
+                          <button class="download-btn"><i class="bi bi-download"></i></button>
+                          <button class="view-btn"><i class="bi bi-eye"></i> View</button>
+                     </div>
                   </div>
+
               </div>
           </div>
 
@@ -104,11 +104,15 @@
                   <h3><a href="#">IntroductionToDb.pdf</a></h3>
                   <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
                   <div class="document-actions">
-                      <button class="comment-btn"><i class="bi bi-chat-dots"></i> 2</button>
-                      <button class="star-btn"><i class="bi bi-star"></i> 5</button>
-                      <button class="download-btn"><i class="bi bi-download"></i> 10</button>
+                  <div class="left">
+                     <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
+                  </div>
+                  <div class="right">
+                      <button class="download-btn"><i class="bi bi-download"></i></button>
                       <button class="view-btn"><i class="bi bi-eye"></i> View</button>
                   </div>
+              </div>
+
               </div>
           </div>
 
@@ -160,23 +164,12 @@
               <span class="post-category">Category Name</span>
             </div>
           </div>
-          <div class="post-actions">
-            <button class="icon-btn" title="Share">
-              <i class="bi bi-share"></i>
-            </button>
-            <button class="icon-btn" title="Options">
-              <i class="bi bi-three-dots"></i>
-            </button>
-          </div>
         </div>
         <div class="post-content">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac mauris quis sapien ultricies tristique.</p>
         </div>
         <div class="post-footer">
-          <button class="like-btn">
-            <i class="bi bi-heart"></i> 
-            <span>Love</span>
-          </button>
+          
           <button class="comment-count" onclick="toggleComments()">
             See all 2 comments
           </button>
@@ -197,9 +190,7 @@
                 <span class="comment-time">10 months ago</span>
               </div>
               <p class="comment-text">Nice post! Very informative.</p>
-              <button class="like-btn comment-like" title="Like">
-                <i class="bi bi-heart"></i>
-              </button>
+              
             </div>
           </div>
 
@@ -217,9 +208,7 @@
                 <span class="comment-time">8 months ago</span>
               </div>
               <p class="comment-text">Can you explain more on the last topic?</p>
-              <button class="like-btn comment-like" title="Like">
-                <i class="bi bi-heart"></i>
-              </button>
+              
             </div>
           </div>
 
