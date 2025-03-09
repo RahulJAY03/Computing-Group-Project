@@ -143,7 +143,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password">
             </div>
-            <button class="signup-btn" onclick="signUp()">Sign up for free</button>
+            <button class="signup-btn"onclick="signUp(event)">Sign up for free</button>
 
             <p>Or with</p>
             <div class="social-login">
@@ -157,7 +157,6 @@
         </div>
     </div>
 </div>
-
 <!-- Login Popup -->
 <div class="popup-overlay" id="loginPopup">
     <div class="popup-container">
@@ -171,28 +170,30 @@
         <div class="popup-right">
             <span class="close-btn" onclick="closePopup('loginPopup')">&#10006;</span>
             <h2>Login</h2>
-            <div class="input-group">
-                <label for="login-email">Email address</label>
-                <input type="email" id="login-email" placeholder="Enter your email">
-            </div>
-            <div class="input-group">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" placeholder="Enter your password">
-            </div>
-            <div class="checkbox-group">
-            <div class="remember-me">
-                <input type="checkbox" id="remember-me">
-                <label for="remember-me">Remember me</label>
+            <form onsubmit="login(event)">
+                <div class="input-group">
+                    <label for="login-email">Email address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email">
                 </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password">
+                </div>
+                <div class="checkbox-group">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
 
-            <button class="signup-btn" onclick="login()">Login</button>
-            <p class="center-text">
-    No account? 
-    <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a>
-</p>
+                <button type="submit" class="signup-btn">Login</button>
+            </form>
 
+            <p class="center-text">
+                No account? 
+                <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a>
+            </p>
 
             <p class="center-text">Or login with</p>
             <div class="social-login">
@@ -206,6 +207,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Additional Signup Details Popup -->
 <div class="popup-overlay" id="additionalSignupPopup">
@@ -272,12 +274,43 @@ function closePopup(id) {
     document.getElementById(id).style.display = 'none';
 }
 
-function signUp() {
-    alert('Signup button clicked!');
-}
+function signUp(event) {
+    event.preventDefault(); // Prevent form submission
 
-function login() {
-    alert('Login button clicked!');
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    // Basic frontend validation
+    if (!email || !password) {
+        alert("All fields are required!");
+        return;
+    }
+
+    fetch("/Cgp-sara/api/auth/signup.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === "success") {
+            alert("Signup successful! Redirecting to complete profile...");
+            sessionStorage.setItem("userEmail", email); // Store email
+            closePopup("signupPopup");
+            openAdditionalSignupPopup(); // Open additional details popup only after success
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error during signup:", error);
+        alert("An error occurred during signup. Please try again later.");
+    });
 }
 
 function openAdditionalSignupPopup() {
@@ -288,18 +321,97 @@ function closePopup(popupId) {
     document.getElementById(popupId).style.display = "none";
 }
 
-// Modify Signup Button in Signup Popup to Open the Additional Signup Popup
 document.addEventListener("DOMContentLoaded", function () {
-    const signupButton = document.querySelector("#signupPopup .signup-btn");
-    
-    if (signupButton) {
-        signupButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent form submission (if needed)
-            closePopup("signupPopup"); // Close the first signup popup
-            openAdditionalSignupPopup(); // Open the new popup
+    let additionalSignupForm = document.getElementById("additionalSignupForm");
+
+    if (additionalSignupForm) {
+        additionalSignupForm.addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            console.log("Submit button clicked!");  // Debugging step
+
+            let email = sessionStorage.getItem("userEmail"); // Get stored email
+            if (!email) {
+                console.error("Email is missing!");
+                alert("Email is missing! Please refresh and try again.");
+                return;
+            }
+
+            let gender = document.getElementById("gender").value;
+            let university = document.getElementById("university").value;
+            let studyProgram = document.getElementById("study-programme").value;
+            let graduationDate = document.getElementById("graduate-year").value;
+
+            fetch("/Cgp-sara/api/auth/updateProfile.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `email=${encodeURIComponent(email)}&gender=${encodeURIComponent(gender)}&university=${encodeURIComponent(university)}&studyProgram=${encodeURIComponent(studyProgram)}&graduationDate=${encodeURIComponent(graduationDate)}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Profile updated successfully! Redirecting to dashboard...");
+                    window.location.href = "index.php";
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error("Error during profile update:", error));
         });
     }
 });
+
+function login(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    console.log("Login function triggered");
+
+    let email = document.getElementById("login-email").value;
+    let password = document.getElementById("login-password").value;
+
+    // Basic frontend validation
+    if (!email || !password) {
+        alert("Both email and password are required!");
+        return;
+    }
+
+    console.log(`Sending login request for email: ${email}`);
+
+    // Send login request to the backend
+    fetch("/Cgp-sara/api/auth/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => {
+        console.log("Response status:", response.status);  // Log status code
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // Log the response from the backend
+        if (data.status === "success") {
+            // If login is successful, store user information in the session
+            sessionStorage.setItem("userEmail", email);
+            alert("Login successful! Redirecting...");
+            window.location.href = "index.php";  // Change to the appropriate page
+        } else {
+            alert("Login failed: " + data.message); // Show error message from backend
+        }
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        alert("An error occurred during login. Please try again later.");
+    });
+}
+
+
 
 </script>
 

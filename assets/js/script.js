@@ -43,10 +43,14 @@ document.addEventListener('click', function (event) {
     const profileIcon = document.querySelector('.profile-icon');
     const popup = document.getElementById('profilePopup');
 
-    if (!profileIcon.contains(event.target) && !popup.contains(event.target)) {
-        popup.classList.remove('show');
+    // Check if profileIcon and popup exist
+    if (profileIcon && popup) {
+        if (!profileIcon.contains(event.target) && !popup.contains(event.target)) {
+            popup.classList.remove('show');
+        }
     }
 });
+
 
 
 

@@ -601,3 +601,9 @@ body {
 #additionalSignupPopup h2 {
     margin-bottom: 2px;
 }
+
+#additionalSignupPopup {
+    display: none; /* Hide the popup initially */
+   
+}
+
