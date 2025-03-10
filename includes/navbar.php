@@ -14,7 +14,7 @@
         <!-- Updated Navbar with Profile Popup -->
         <div class="d-flex align-items-center" style="position: relative;">
             <!-- Highlighted XP -->
-            <span class="xp-highlight">780XP</span>
+            <span class="xp-highlight" id="xp-value">Loading XP...</span>
             
             <img src="../assets/images/profile.jpg" alt="Profile" class="profile-icon" onclick="toggleProfilePopup()">
 
@@ -22,8 +22,20 @@
             <div class="profile-popup" id="profilePopup">
                 <a href="userprofile.php">My Profile</a>
                 <a href="setting.php">Settings</a>
-                <a href="logout.php">Logout</a>
+                <a href="#" onclick="confirmLogout(event)">Logout</a>
+
             </div>
         </div>
     </div>
 </nav>
+
+<!-- Logout Confirmation Popup -->
+<div id="logoutPopup" class="popup-overlay" onclick="closeLogoutPopup(event)">
+    <div class="popup-container">
+        <h2>Are you sure you want to logout?</h2>
+        <div class="popup-buttons">
+            <button onclick="logoutUser()">Yes</button>
+            <button onclick="closeLogoutPopup()">No</button>
+        </div>
+    </div>
+</div>

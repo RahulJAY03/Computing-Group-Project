@@ -50,7 +50,40 @@ document.addEventListener('click', function (event) {
         }
     }
 });
+// Toggle profile popup
+function toggleProfilePopup() {
+    var popup = document.getElementById("profilePopup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+}
+
+// Show logout confirmation popup
+function confirmLogout(event) {
+    event.preventDefault(); // Prevent the default link action
+    document.getElementById("logoutPopup").style.display = "flex";
+}
+
+// Close logout popup when clicking "No" or outside the popup
+function closeLogoutPopup(event) {
+    if (!event || event.target.classList.contains("popup-overlay")) {
+        document.getElementById("logoutPopup").style.display = "none";
+    }
+}
+function logoutUser() {
+    window.location.href = "/Cgp-sara/api/auth/logout.php";
+}
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const xpElement = document.getElementById("xp-value");
+    if (!xpElement) return; // Avoid errors if element doesn't exist
 
-
+    fetch(`${window.location.origin}/Cgp-sara/api/auth/getXP.php`) // Dynamic path
+    .then(response => response.json())
+    .then(data => {
+        xpElement.innerText = (data.xp !== undefined) ? `${data.xp}XP` : "Error";
+    })
+    .catch(error => {
+        console.error("Error fetching XP:", error);
+        xpElement.innerText = "Error";
+    });
+});

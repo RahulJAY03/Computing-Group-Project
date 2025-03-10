@@ -12,7 +12,7 @@
 
 
     
-    <title>sessions</title>
+    <title>My Profile</title>
 </head>
 <body>
    
@@ -22,35 +22,35 @@
     ?>
     
     <div class="container">
-        <header>
-            <div class="profile">
-                <img src="../assets/images/girl.png" alt="User Avatar">
-                <h1> Sarali Balasinghe </h1>
-            </div>
-            <div class="settings">
-                <button class="settings-btn"> <i class="fas fa-cog"></i></button>
-                <button class="settings-btn"> <i class="fas fa-sign-out-alt"></i></button>
-            </div>
-        </header>
+    <header>
+        <div class="profile">
+            <img id="profile-avatar" src="../assets/images/girl.png" alt="User Avatar">
+            <h1 id="user-name">Loading...</h1>
+        </div>
+        <div class="settings">
+            <button class="settings-btn"> <i class="fas fa-cog"></i></button>
+            <button class="settings-btn" onclick="logoutUser()"> <i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </header>
 
-        <section class="info-section">
-            <div class="studies">
-                <h2>My Studies</h2>
-                <div class="study-details">
-                    <div class="study-item">
-                        <img src="../assets/images/university-of-milan.png" alt="User Avatar">
-                        <p>University of Plymouth</p>
-                    </div>
-                    <div class="study-item">
-                        <img src="../assets/images/graduating-student.png" alt="User Avatar">
-                        <p>Software Engineering - Bachelor's Degree</p>
-                    </div>
-                    <div class="study-item">
-                         <img src="../assets/images/calendar.png" alt="User Avatar">
-                        <p>2023 - 2026</p>
-                    </div>
+    <section class="info-section">
+        <div class="studies">
+            <h2>My Studies</h2>
+            <div class="study-details">
+                <div class="study-item">
+                    <img src="../assets/images/university-of-milan.png" alt="University">
+                    <p id="user-university">Loading...</p>
+                </div>
+                <div class="study-item">
+                    <img src="../assets/images/graduating-student.png" alt="Degree">
+                    <p id="user-studyProgram">Loading...</p>
+                </div>
+                <div class="study-item">
+                    <img src="../assets/images/calendar.png" alt="Graduation Date">
+                    <p id="user-graduation">Loading...</p>
                 </div>
             </div>
+        </div>
             <div class="stats">
                 <h2>My Stats</h2>
                 <div class="stat-details">
@@ -80,10 +80,11 @@
         </div>
     </div>
 
-    <script src="../assets/js/script.js"></script>
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <!-- Add jQuery -->
+<script src="../assets/js/userProfile.js"></script>    
+<script src="../assets/js/script.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
 
 
 </body>

@@ -337,6 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            let fullName = document.getElementById("username").value; // Get full name
             let gender = document.getElementById("gender").value;
             let university = document.getElementById("university").value;
             let studyProgram = document.getElementById("study-programme").value;
@@ -345,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch("/Cgp-sara/api/auth/updateProfile.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `email=${encodeURIComponent(email)}&gender=${encodeURIComponent(gender)}&university=${encodeURIComponent(university)}&studyProgram=${encodeURIComponent(studyProgram)}&graduationDate=${encodeURIComponent(graduationDate)}`
+                body: `email=${encodeURIComponent(email)}&fullName=${encodeURIComponent(fullName)}&gender=${encodeURIComponent(gender)}&university=${encodeURIComponent(university)}&studyProgram=${encodeURIComponent(studyProgram)}&graduationDate=${encodeURIComponent(graduationDate)}`
             })
             .then(response => {
                 if (!response.ok) {
