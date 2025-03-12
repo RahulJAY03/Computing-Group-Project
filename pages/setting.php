@@ -14,74 +14,65 @@
     <title>sessions</title>
 </head>
 <body>
+
+<?php
+session_start();
+?>
+
    
     <?php
         include '../includes/navbar.php';  //meee wageeeee karannnn
         include '../includes/sidebar.php'; //meee wageeeee karannnn
     ?>
     <div class="settings-container">
-        <h2>Settings</h2>
-        
-        <div class="section">
+    <h2>Settings</h2>
+
+    <div class="section">
         <div class="section1">
             <h3>Change Email</h3>
             <form>
                 <div class="form-group">
                     <label>Current email</label>
-                    <input type="email" value="sarialbalasinghe@gmail.com" disabled>
+                    <input type="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" disabled>
+
                 </div>
                 <div class="form-group">
                     <label>Current password</label>
-                    <input type="password" placeholder="Enter current password">
+                    <input type="password" class="email-current-password" placeholder="Enter current password">
                 </div>
                 <div class="form-group">
                     <label>New email</label>
-                    <input type="email" placeholder="Enter new email">
+                    <input type="email" class="new-email" placeholder="Enter new email">
                 </div>
                 <div class="form-group">
                     <label>Repeat new email</label>
-                    <input type="email" placeholder="Enter new email again">
+                    <input type="email" class="confirm-new-email" placeholder="Enter new email again">
                 </div>
-                <button class="save-btn">Save changes</button>
+                <button class="save-btn email-save-btn">Save changes</button>
             </form>
         </div>
-        
-        
+
         <div class="section2">
             <h3>Change password</h3>
             <form>
                 <div class="form-group">
                     <label>Current password</label>
-                    <input type="password" placeholder="Enter current password">
+                    <input type="password" class="password-current-password" placeholder="Enter current password">
                 </div>
                 <div class="form-group">
                     <label>New password</label>
-                    <input type="password" placeholder="Enter new password">
+                    <input type="password" class="new-password" placeholder="Enter new password">
                 </div>
                 <div class="form-group">
                     <label>Repeat new password</label>
-                    <input type="password" placeholder="Enter new password again">
+                    <input type="password" class="confirm-new-password" placeholder="Enter new password again">
                 </div>
-                <button class="save-btn">Save changes</button>
+                <button class="save-btn password-save-btn">Save changes</button>
             </form>
         </div>
-        
-        <div class="section3">
-            <h3>Delete Account</h3>
-            <p>Do you want to delete your ‘The Kuppiya’ account? We wish you all the best and hope to see you again soon.</p>
-            <button class="delete-btn" onclick="showModal()">Permanently Delete Account</button>
-        </div>
     </div>
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <h3>Are you sure you want to delete your account?</h3>
-            <div class="modal-buttons">
-                <button class="modal-delete">Delete</button>
-                <button class="modal-cancel" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
+</div>
+
 
     
     
