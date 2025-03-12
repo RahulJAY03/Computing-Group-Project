@@ -29,29 +29,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $collection = $db->users;
     $user = $collection->findOne(['email' => $email]);
 
-    // Debug log to see if the user was found
     if ($user) {
         error_log("User found: " . $user['email']);
+
+        // **Check if the user is inactive**
+        if (isset($user['is_active']) && $user['is_active'] === false) {
+            error_log("Login attempt for inactive account: " . $email);
+            echo json_encode(['status' => 'error', 'message' => 'Your account has been deactivated. Please contact support.']);
+            exit;
+        }
+
         // Verify password
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = (string)$user['_id']; // Store user ID
             $_SESSION['email'] = $user['email'];
 
-            // Debug log to check session values
             error_log("Login successful for: " . $user['email']);
             echo json_encode(['status' => 'success', 'message' => 'Login successful']);
         } else {
-            // Password mismatch log
             error_log("Incorrect password for: $email");
             echo json_encode(['status' => 'error', 'message' => 'Invalid email or password']);
         }
     } else {
-        // No user found log
         error_log("No user found with email: $email");
         echo json_encode(['status' => 'error', 'message' => 'Invalid email or password']);
     }
 } else {
-    // Invalid request method log
     error_log("Invalid request method");
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }

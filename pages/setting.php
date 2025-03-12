@@ -83,14 +83,11 @@
         </div>
     </div>
 
-    </div>
     
-
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/setting.js"></script>
-
-
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="/Cgp-sara/assets/js/script.js" defer></script>
+<script src="/Cgp-sara/assets/js/setting.js" defer></script>
+<script src="/Cgp-sara/assets/js/bootstrap.bundle.min.js" defer></script>
 
 
 </body>
