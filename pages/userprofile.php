@@ -28,8 +28,9 @@
             <h1 id="user-name">Loading...</h1>
         </div>
         <div class="settings">
-            <button class="settings-btn"> <i class="fas fa-cog"></i></button>
-            <button class="settings-btn" onclick="logoutUser()"> <i class="fas fa-sign-out-alt"></i></button>
+            <button class="settings-btn" onclick="window.location.href='setting.php'"> <i class="fas fa-cog"></i></button>
+            <button class="settings-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
+
         </div>
     </header>
 

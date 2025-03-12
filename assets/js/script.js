@@ -56,21 +56,57 @@ function toggleProfilePopup() {
     popup.style.display = popup.style.display === "block" ? "none" : "block";
 }
 
+
+
 // Show logout confirmation popup
 function confirmLogout(event) {
-    event.preventDefault(); // Prevent the default link action
-    document.getElementById("logoutPopup").style.display = "flex";
+    event.preventDefault(); // Prevent default action (if it's inside a link)
+    document.getElementById("logoutPopup").style.display = "flex"; // Show the confirmation popup
 }
 
-// Close logout popup when clicking "No" or outside the popup
+// Close popup when clicking "No" or outside the popup container
 function closeLogoutPopup(event) {
+    const popup = document.getElementById("logoutPopup");
+
+    // Close when clicking the overlay (outside the popup container)
     if (!event || event.target.classList.contains("popup-overlay")) {
-        document.getElementById("logoutPopup").style.display = "none";
+        popup.style.display = "none";
+    }
+
+    // Close when clicking the "No" button
+    if (event && event.target.id === "noLogoutBtn") {
+        popup.style.display = "none";
     }
 }
+
+// Redirect to logout script
 function logoutUser() {
-    window.location.href = "/Cgp-sara/api/auth/logout.php";
+    window.location.href = "/Cgp-sara/api/auth/logout.php"; // Log the user out
 }
+
+// Attach event listener to logout buttons (for both inline and non-inline buttons)
+document.addEventListener("DOMContentLoaded", function () {
+    // Handle logout button in settings (on any page)
+    const logoutButtons = document.querySelectorAll(".settings-btn i.fas.fa-sign-out-alt");
+
+    // Add event listeners for each logout button
+    logoutButtons.forEach(button => {
+        button.parentElement.addEventListener("click", confirmLogout); // Show confirmation popup
+    });
+
+    // Handle the logout button on the user profile page (if it has a specific button with ID)
+    const logoutButtonUserProfile = document.getElementById("logoutBtn"); // Adjust ID if necessary
+    if (logoutButtonUserProfile) {
+        logoutButtonUserProfile.addEventListener("click", confirmLogout);
+    }
+
+    // Attach event listener to the "No" button to close the popup
+    const noLogoutBtn = document.getElementById("noLogoutBtn");
+    if (noLogoutBtn) {
+        noLogoutBtn.addEventListener("click", closeLogoutPopup);
+    }
+});
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

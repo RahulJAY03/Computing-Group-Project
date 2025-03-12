@@ -35,7 +35,7 @@
         <h2>Are you sure you want to logout?</h2>
         <div class="popup-buttons">
             <button onclick="logoutUser()">Yes</button>
-            <button onclick="closeLogoutPopup()">No</button>
+            <button id="noLogoutBtn">No</button> <!-- Added ID for event listener -->
         </div>
     </div>
 </div>
