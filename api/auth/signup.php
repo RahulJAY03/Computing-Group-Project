@@ -26,17 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insert user
+    // Default profile image
+    $defaultProfileImage = "uploads/profile_pictures/default.png";
+
+    // Insert user with profile_image field
     $insertResult = $usersCollection->insertOne([
         "email" => $email,
         "password" => $hashedPassword,
         "xp" => 0, // Default XP
         "achievements" => [],
-        "created_at" => new MongoDB\BSON\UTCDateTime()
+        "created_at" => new MongoDB\BSON\UTCDateTime(),
+        "profile_image" => $defaultProfileImage // Add this field
     ]);
 
     // Success response
     echo json_encode(["status" => "success", "message" => "Signup successful!"]);
 }
-
 ?>
+

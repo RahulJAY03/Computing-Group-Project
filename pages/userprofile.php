@@ -15,7 +15,11 @@
     <title>My Profile</title>
 </head>
 <body>
-   
+<?php
+session_start();
+?>
+
+
     <?php
         include '../includes/navbar.php';  //meee wageeeee karannnn
         include '../includes/sidebar.php'; //meee wageeeee karannnn
@@ -24,9 +28,24 @@
     <div class="container">
     <header>
         <div class="profile">
-            <img id="profile-avatar" src="../assets/images/girl.png" alt="User Avatar">
-            <h1 id="user-name">Loading...</h1>
+        <label for="profile-upload" class="profile-upload-label">
+
+                <?php
+        $user_email = $_SESSION['email'];
+        require_once '../config/db.php'; // Ensure this is correctly included
+$collection = $db->users; 
+        $user = $collection->findOne(["email" => $user_email]);
+
+        $profileImage = isset($user['profile_image']) ? "../" . $user['profile_image'] : "../assets/images/girl.png";
+        ?>
+        <img id="profile-avatar" src="<?= $profileImage ?>" alt="User Avatar">
+
+            <div class="overlay"><i class="fas fa-pencil"></i></div>
+        </label>
+        <input type="file" id="profile-upload" style="display: none;" accept="image/*">
+        <h1 id="user-name">Loading...</h1>
         </div>
+
         <div class="settings">
             <button class="settings-btn" onclick="window.location.href='setting.php'"> <i class="fas fa-cog"></i></button>
             <button class="settings-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>

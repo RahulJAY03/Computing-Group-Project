@@ -19,10 +19,16 @@ if (!$user) {
     exit;
 }
 
+// Set a default profile image if none exists
+$profileImage = isset($user["profile_image"]) && !empty($user["profile_image"])
+    ? "../" . $user["profile_image"]
+    : "../assets/images/girl.png";
+
 echo json_encode([
     "fullName" => $user["fullName"] ?? "",
     "university" => $user["university"] ?? "",
     "studyProgram" => $user["studyProgram"] ?? "",
-    "graduationDate" => isset($user["graduationDate"]) ? date("Y", strtotime($user["graduationDate"])) : ""
+    "graduationDate" => isset($user["graduationDate"]) ? date("Y", strtotime($user["graduationDate"])) : "",
+    "profile_image" => $profileImage // Add profile image
 ]);
 ?>
