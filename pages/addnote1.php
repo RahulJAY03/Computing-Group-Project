@@ -9,26 +9,7 @@
     <link rel="stylesheet" href="../assets/css/addnote.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <title>Add Notes</title>
-    <style>
-        .file-drop {
-            border: 2px dashed #28a745;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            cursor: pointer;
-        }
-        .file-preview {
-            margin-top: 10px;
-            display: none;
-            max-width: 100%;
-            height: auto;
-        }
-        .file-name {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #555;
-        }
-    </style>
+   
 </head>
 <body>
 
