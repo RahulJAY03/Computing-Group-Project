@@ -46,21 +46,37 @@
         <button class="browse-btn" onclick="document.getElementById('fileInput').click()" id="uploadbutton">Or browse files here</button>
 </div>
 
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Upload Successful</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your file has been uploaded successfully!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="continueBtn">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(event) {
-            let href = this.getAttribute('href');
-            if (href !== '#' && href) {
-                window.location.href = href;
-            }
-        });
-    });
-    </script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById('fileInput').addEventListener('change', function() {
+    if (this.files.length > 0) {
+        var modal = new bootstrap.Modal(document.getElementById('successModal'));
+        modal.show();
+    }
+});
 
-
+document.getElementById('continueBtn').addEventListener('click', function() {
+    window.location.href = "addnote2.php";
+});
+</script>
 
 </body>
 </html>
