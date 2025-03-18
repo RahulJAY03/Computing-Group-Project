@@ -143,20 +143,16 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password">
             </div>
-            <button class="signup-btn"onclick="signUp(event)">Sign up for free</button>
+            <button class="signup-btn" onclick="signUp(event)">Sign up for free</button>
 
-            <p>Or with</p>
+            <p>Or sign up with</p>
             <div class="social-login">
-                <a href="https://accounts.google.com/signup" target="_blank">
-                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
-                </a>
-                <a href="https://appleid.apple.com/sign-in" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
-                </a>
+                <div id="signup-google-btn" class="g-signin2"></div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Login Popup -->
 <div class="popup-overlay" id="loginPopup">
     <div class="popup-container">
@@ -190,23 +186,15 @@
                 <button type="submit" class="signup-btn">Login</button>
             </form>
 
-            <p class="center-text">
-                No account? 
-                <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a>
-            </p>
-
+            <p class="center-text">No account? <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a></p>
             <p class="center-text">Or login with</p>
             <div class="social-login">
-                <a href="https://accounts.google.com/signup" target="_blank">
-                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
-                </a>
-                <a href="https://appleid.apple.com/sign-in" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
-                </a>
+                <div id="login-google-btn" class="g-signin2"></div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- Additional Signup Details Popup -->
@@ -415,6 +403,8 @@ function login(event) {
 
 
 </script>
+
+<script src="../assets/js/auth.js"></script>
 
 </body>
 </html>
