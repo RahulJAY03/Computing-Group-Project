@@ -21,7 +21,7 @@
     <div class="main-content">
         <h2><strong>Upload on <br>The Kuppiya</strong></h2>
         <p>Earn <span><img src="../assets/images/coin7.png" alt="coin"></span> credits by uploading and sharing your study notes</p>
-
+    <form action="api/auth/addfile.php" method="post" enctype="multipart/form-data">
         <!-- Progress Steps -->
         <div class="progress-container">
             <div class="step completed">
@@ -102,9 +102,11 @@
                         <center><button class="btn button-success mt-3"> <img src="../assets/images/icon.png"> Upload</button></center>
                     </div>
                 </div>
+                
             </div>
         </div>
-    </div>    
+    </div>
+</form>    
 </div>    
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
