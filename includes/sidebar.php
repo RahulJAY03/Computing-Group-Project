@@ -31,11 +31,11 @@ $categories = $collection->find(); // Fetch all categories
         </div>
 
         <!-- Add Button -->
-        <a href="addnote1.php" class="btn btn-success mt-5 w-100" 
+        <a href="addnote2.php" class="btn btn-success mt-5 w-100" 
    style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
    onmouseover="this.style.backgroundColor='#62d677'" 
    onmouseout="this.style.backgroundColor='#74E685'">
-    + Add
+    + Contribute
 </a>
 
     </div>
@@ -74,7 +74,7 @@ $categories = $collection->find(); // Fetch all categories
             style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
             onmouseover="this.style.backgroundColor='#62d677'" 
             onmouseout="this.style.backgroundColor='#74E685'">
-            + Add
+            + Contribute
         </button>
     </div>
 </div>
