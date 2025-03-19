@@ -21,7 +21,8 @@
     <div class="main-content">
         <h2><strong>Upload on <br>The Kuppiya</strong></h2>
         <p>Earn <span><img src="../assets/images/coin7.png" alt="coin"></span> credits by uploading and sharing your study notes</p>
-    <form action="api/auth/addfile.php" method="post" enctype="multipart/form-data">
+
+    <form id="uploadForm" action="../api/auth/addfile.php" method="post" encytpe="multipart/form-data">
         <!-- Progress Steps -->
         <div class="progress-container">
             <div class="step completed">
@@ -60,16 +61,16 @@
 
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <select class="form-control">
-                                    <option>Select a category</option>
+                                <select class="form-control" id="category" required>
+                                    <option value="">Select a category</option>
                                     <option>IT</option>
                                     <option>BUSINESS</option>
                                     <option>SCIENCE</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control">
-                                    <option>Select a module name</option>
+                                <select class="form-control" id="module" required>
+                                    <option value="">Select a module name</option>
                                     <option>Introduction to Computer Science</option>
                                     <option>Programming in C</option>
                                     <option>Computer Architecture</option>
@@ -84,22 +85,22 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <select class="form-control">
-                                    <option>Document type</option>
+                                <select class="form-control" id="docType" required>
+                                    <option value="">Document type</option>
                                     <option>PDF</option>
                                     <option>Image</option>
                                     <option>Doc</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control">
-                                    <option>Language</option>
+                                <select class="form-control" id="language" required>
+                                    <option value="">Language</option>
                                     <option>English</option>
                                 </select>
                             </div>
                         </div>
-                        <input type="text" class="form-control mt-3" placeholder="Add description">
-                        <center><button class="btn button-success mt-3"> <img src="../assets/images/icon.png"> Upload</button></center>
+                        <input type="text" class="form-control mt-3" id="description" placeholder="Add description" required>
+                        <center><button type="submit" class="btn button-success mt-3"> <img src="../assets/images/icon.png"> Upload</button></center>
                     </div>
                 </div>
                 
@@ -158,6 +159,21 @@ removeFile.addEventListener('click', function() {
     removeFile.style.display = "none";
     documentCounter = 0;
     docCount.textContent = documentCounter;
+});
+
+// Form Validation
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    const category = document.getElementById('category').value;
+    const module = document.getElementById('module').value;
+    const docType = document.getElementById('docType').value;
+    const language = document.getElementById('language').value;
+    const description = document.getElementById('description').value;
+    const files = fileInput.files;
+
+    if (!category || !module || !docType || !language || !description || files.length === 0) {
+        alert('Please fill out all fields and select at least one file.');
+        event.preventDefault(); // Prevent form submission
+    }
 });
 </script>
 

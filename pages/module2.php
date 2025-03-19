@@ -1,3 +1,19 @@
+<?php
+require_once __DIR__ . '/../config/db.php'; // MongoDB connection script
+
+$categoryName = "IT"; // Set the category (this can be dynamic based on user selection)
+
+// Fetch the category ID for the given category name
+$category = $db->categories->findOne(['categoryName' => $categoryName]);
+
+if ($category) {
+    $categoryId = $category['_id']; // Get category ID
+    $modules = $db->modules->find(['categoryId' => $categoryId]); // Fetch modules for this category
+} else {
+    $modules = []; // If category not found, return empty array
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,18 +32,13 @@
     ?>
     
     <div class="container">
-        <h2 class="page-title">IT Section Modules</h2>
+        <h2 class="page-title"><?php echo htmlspecialchars($categoryName); ?> Section Modules</h2>
         <div class="modules-grid">
-            <button class="module-item active" onclick="window.location.href='discussion_document.php'">Database Management System</button>
-            <button class="module-item">Introduction to Computer Science</button>
-            <button class="module-item">Programming in C</button>
-            <button class="module-item">Computer Architecture</button>
-            <button class="module-item">Introduction to IOT</button>
-            <button class="module-item">Mobile Application Development</button>
-            <button class="module-item">Mathematics for Computing</button>
-            <button class="module-item">Computer Networks</button>
-            <button class="module-item">Information Management and Retrieval</button>
-            <button class="module-item">Algorithms and Data Structures</button>
+            <?php foreach ($modules as $module) : ?>
+                <button class="module-item" onclick="window.location.href='discussion_document.php?module=<?php echo urlencode($module['moduleName']); ?>'">
+                    <?php echo htmlspecialchars($module['moduleName']); ?>
+                </button>
+            <?php endforeach; ?>
         </div>
     </div>
 

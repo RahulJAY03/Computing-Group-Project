@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__ . '/../config/db.php'; // Include the MongoDB connection script
+
+$collection = $db->categories; // Connect to the 'categories' collection
+
+$categories = $collection->find(); // Fetch all categories
+?>
+
 <!-- Sidebar - Visible on larger screens -->
 <div class="d-none d-lg-block bg-light text-black sidebar">
     <div class="offcanvas-body d-flex flex-column p-3">
@@ -71,17 +79,20 @@
     </div>
 </div>
 
-<!-- Modules Sidebar (Sliding from Left) -->
+
+<!-- module side bar -->
 <div id="modulesSidebar" class="modules-sidebar">
     <div class="modules-header">
         <h5>Select a Category</h5>
         <button class="btn-close" id="closeModulesSidebar"></button>
     </div>
     <div class="modules-body">
-    <button class="category-btn" onclick="window.location.href='module2.php'">IT</button>
-
-        <button class="category-btn">Business</button>
-        <button class="category-btn">Science</button>
+        <?php foreach ($categories as $category) : ?>
+            <button class="category-btn" onclick="window.location.href='module2.php?category=<?php echo urlencode($category['categoryName']); ?>'">
+                <?php echo htmlspecialchars($category['categoryName']); ?>
+            </button>
+        <?php endforeach; ?>
     </div>
 </div>
+
 
