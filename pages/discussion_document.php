@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +20,30 @@
   <link rel="stylesheet" href="../assets/css/module3.css"> <!-- Additional Styles for Documents -->
 </head>
 <body>
+
+<?php
+require_once __DIR__ . '/../config/db.php'; // MongoDB connection script
+
+// Check if 'module' parameter is passed in the URL
+$moduleName = isset($_GET['module']) ? $_GET['module'] : null;
+
+if ($moduleName) {
+    // Fetch the module details based on the module name
+    $module = $db->modules->findOne(['moduleName' => $moduleName]);
+
+    if (!$module) {
+        // If no module found, redirect or show error
+        header("Location: module2.php?category=IT"); // Redirect to IT category page or show error
+        exit;
+    }
+} else {
+    // Redirect if module is not found in the URL
+    header("Location: module2.php?category=IT");
+    exit;
+}
+
+?>
+
   <?php
       include '../includes/navbar.php';  // Navbar include
       include '../includes/sidebar.php'; // Sidebar include
@@ -26,10 +52,12 @@
   <div class="container">
     <!-- Header Section -->
     <div class="header-section">
-      <h2>
-        Database Management System
-      </h2>
-    </div>
+            <h2>
+                <?php echo htmlspecialchars($module['moduleName']); ?>
+            </h2>
+        </div>
+
+        
 
     <!-- Tabs -->
     <div class="tab-section">
