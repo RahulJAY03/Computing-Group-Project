@@ -22,7 +22,7 @@
         <h2><strong>Upload on <br>The Kuppiya</strong></h2>
         <p>Earn <span><img src="../assets/images/coin7.png" alt="coin"></span> credits by uploading and sharing your study notes</p>
 
-    <form id="uploadForm" action="../api/auth/addfile.php" method="post" encytpe="multipart/form-data">
+        <form id="uploadForm" action="../api/auth/addfile.php" method="post" encytpe="multipart/form-data">
         <!-- Progress Steps -->
         <div class="progress-container">
             <div class="step completed">
@@ -88,6 +88,7 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="text" class="form-control mt-3" id="title" placeholder="Add a title" required>
                         <input type="text" class="form-control mt-3" id="description" placeholder="Add description" required>
                         <center><button type="submit" class="btn button-success mt-3"> <img src="../assets/images/icon.png"> Upload</button></center>
                     </div>
