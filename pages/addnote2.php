@@ -56,46 +56,35 @@
                 <!-- Form Box -->
                 <div class="col-md-8">
                     <div class="form-container">
-                        <h5 id="fileName" class="file-name"></h5> 
+                        <h6 id="fileName" class="file-name"></h6> 
                         <img class="trashicon" id="removeFile" src="../assets/images/Trash.png" style="cursor: pointer; display: none;">
 
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <select class="form-control" id="category" required>
                                     <option value="">Select a category</option>
-                                    <option>IT</option>
-                                    <option>BUSINESS</option>
-                                    <option>SCIENCE</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <select class="form-control" id="module" required>
                                     <option value="">Select a module name</option>
-                                    <option>Introduction to Computer Science</option>
-                                    <option>Programming in C</option>
-                                    <option>Computer Architecture</option>
-                                    <option>Introduction to IOT</option>
-                                    <option>Mobile Application Development</option>
-                                    <option>Mathematics for Computing</option>
-                                    <option>Computer Networks</option>
-                                    <option>Information Management and Retrieval</option>
-                                    <option>Algorithms and Data Structures</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <select class="form-control" id="docType" required>
-                                    <option value="">Document type</option>
-                                    <option>PDF</option>
-                                    <option>Image</option>
-                                    <option>Doc</option>
+                                    <option value="Document_type">Document type</option>
+                                    <option value="PDF">PDF</option>
+                                    <option value="images">Image</option>
+                                    <option value="Document">Document</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <select class="form-control" id="language" required>
                                     <option value="">Language</option>
-                                    <option>English</option>
+                                    <option value="english">English</option>
+                                    <option value="sinhala">Sinhala</option>
                                 </select>
                             </div>
                         </div>
@@ -111,71 +100,7 @@
 </div>    
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script>
-document.getElementById("addIcon").addEventListener("click", function() {
-    document.getElementById("fileInput").click();
-});
-
-const fileInput = document.getElementById('fileInput');
-const filePreviewContainer = document.getElementById('filePreviewContainer');
-const fileName = document.getElementById('fileName');
-const removeFile = document.getElementById('removeFile');
-const docCount = document.getElementById('docCount');
-let documentCounter = 0; // Counter for files
-
-fileInput.addEventListener('change', function() {
-    Array.from(fileInput.files).forEach(file => {
-        handleFileSelection(file);
-    });
-});
-
-function handleFileSelection(file) {
-    const fileType = file.type;
-    const reader = new FileReader();
-    const previewElement = document.createElement('div');
-    previewElement.style.marginTop = "10px";
-
-    if (fileType.startsWith("image/")) {
-        reader.onload = function(e) {
-            previewElement.innerHTML = `<img src="${e.target.result}" class="file-preview" style="max-width: 100%; height: auto;">`;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        previewElement.innerHTML = `<p class="file-name">📄 ${file.name}</p>`;
-    }
-
-    filePreviewContainer.appendChild(previewElement);
-    fileName.textContent = file.name;
-    removeFile.style.display = "block";
-
-    documentCounter++;
-    docCount.textContent = documentCounter;
-}
-
-// Remove all uploaded files when clicking the trash icon
-removeFile.addEventListener('click', function() {
-    filePreviewContainer.innerHTML = "";
-    fileName.textContent = "";
-    removeFile.style.display = "none";
-    documentCounter = 0;
-    docCount.textContent = documentCounter;
-});
-
-// Form Validation
-document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    const category = document.getElementById('category').value;
-    const module = document.getElementById('module').value;
-    const docType = document.getElementById('docType').value;
-    const language = document.getElementById('language').value;
-    const description = document.getElementById('description').value;
-    const files = fileInput.files;
-
-    if (!category || !module || !docType || !language || !description || files.length === 0) {
-        alert('Please fill out all fields and select at least one file.');
-        event.preventDefault(); // Prevent form submission
-    }
-});
-</script>
+<script src="../assets/js/addnote2.js"></script>
 
 </body>
 </html>
