@@ -1,101 +1,102 @@
 <?php
-require '../../config/db.php'; // Include database connection
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
+require_once '../../config/db.php'; 
 
-use MongoDB\Client;
-use MongoDB\BSON\ObjectId;
-use MongoDB\BSON\UTCDateTime;
+require '../../vendor/autoload.php'; // Include MongoDB library
+$client = new MongoDB\Client("mongodb://localhost:27017");
+$db = $client->thekuppiya; 
 
-$mongoUri = "mongodb://localhost:27017";
+header("Content-Type: application/json");
 
-try {
-    // Create a new MongoDB client
-    $client = new Client($mongoUri);
-
-    // Select the databases
-    $database = $client->selectDatabase('thekuppiya');
-    $usersCollection = $database->selectCollection('users');
-    $modulesCollection = $database->selectCollection('modules');
-    $notesCollection = $database->selectCollection('notes');
-
-    // Check if the user is logged in
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!isset($_SESSION['email'])) {
-        echo "User not logged in!";
+        http_response_code(401);
+        echo json_encode(["success" => false, "error" => "User not logged in"]);
         exit;
     }
 
-    $loggedInEmail = $_SESSION['email'];
+    $email = $_SESSION['email'];
 
-    // Find the userId based on the email
-    $user = $usersCollection->findOne(['email' => $loggedInEmail]);
-    if (!$user) {
-        echo "User not found!";
+    $uploadsDir = "../../uploads/notes/";
+    if (!is_dir($uploadsDir)) {
+        mkdir($uploadsDir, 0755, true); // Secure directory creation
+    }
+
+    // File Handling
+    if (!isset($_FILES["file"])) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "error" => "No file uploaded"]);
         exit;
     }
-    $userId = $user['_id'];
 
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // Validate required fields
-        if (empty($_FILES['file']['name']) || empty($_POST['category']) || empty($_POST['module']) ||
-            empty($_POST['documentType']) || empty($_POST['language']) || empty($_POST['description'])) {
-            echo "All fields are required!";
-            exit;
-        }
+    $fileName = basename($_FILES["file"]["name"]);
+    $fileTmpName = $_FILES["file"]["tmp_name"];
+    $fileSize = $_FILES["file"]["size"];
+    $allowedTypes = ['pdf', 'doc', 'docx', 'jpeg', 'png', 'xls', 'zip'];
 
-        // Find moduleId based on module name
-        $module = $modulesCollection->findOne(['name' => $_POST['module']]);
-        if (!$module) {
-            echo "Module not found!";
-            exit;
-        }
-        $moduleId = $module['_id'];
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-        // File upload handling
-        $targetDir = "../../uploads/";
-        $fileName = basename($_FILES["file"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
+    if (!in_array($fileExt, $allowedTypes)) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "error" => "Invalid file type"]);
+        exit;
+    }
 
-        // Allowed file types
-        $allowedTypes = ["pdf", "doc", "docx", "jpeg", "png", "xls", "zip"];
-        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    if ($fileSize > 100 * 1024 * 1024) { // 100MB Limit
+        http_response_code(400);
+        echo json_encode(["success" => false, "error" => "File too large"]);
+        exit;
+    }
 
-        if (!in_array($fileType, $allowedTypes)) {
-            echo "Invalid file type! Only PDF, DOC, DOCX, JPEG, PNG, XLS, ZIP allowed.";
-            exit;
-        }
+    // Generate a unique file name to avoid overwriting
+    $newFileName = time() . "_" . preg_replace("/[^a-zA-Z0-9.]/", "_", $fileName);
+    $filePath = $uploadsDir . $newFileName;
 
-        // Move uploaded file
-        if (!move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-            echo "Error uploading file.";
-            exit;
-        }
+    if (move_uploaded_file($fileTmpName, $filePath)) {
+        // Store Data in MongoDB
+        $collection = $db->notes;
+        $insertResult = $collection->insertOne([
+            "email" => $email,
+            "file_name" => $fileName,
+            "file_path" => $filePath,
+            // "category" => $_POST['category'] ?? "",
+            // "module" => $_POST['module'] ?? "",
+            "moduleId" => $_POST['moduleId'] ?? "",
+            "doc_type" => $_POST['docType'] ?? "",
+            "language" => $_POST['language'] ?? "",
+            "title" => $_POST['title'] ?? "",
+            "description" => $_POST['description'] ?? "",
+            "created_at" => new MongoDB\BSON\UTCDateTime()
+        ]);
 
-        // Insert data into MongoDB
-        $document = [
-            'title' => $fileName,
-            'description' => $_POST['description'],
-            'language' => $_POST['language'],
-            'documentType' => $_POST['documentType'],
-            'filePath' => $targetFilePath,
-            'uploadDate' => new UTCDateTime(time() * 1000),
-            'userId' => new ObjectId($userId),
-            'moduleId' => new ObjectId($moduleId),
-            'category' => $_POST['category'],
-            'module' => $_POST['module']
-        ];
+        if ($insertResult->getInsertedCount() > 0) {
+            // **Update user's XP in MongoDB**
+            $usersCollection = $db->users;
+            $updateXP = $usersCollection->updateOne(
+                ["email" => $email],
+                ['$inc' => ["xp" => 10]] // Increase XP by 10
+            );
 
-        $result = $notesCollection->insertOne($document);
-
-        if ($result->getInsertedCount() === 1) {
-            echo "File uploaded and data inserted successfully!";
+            if ($updateXP->getModifiedCount() > 0) {
+                http_response_code(201);
+                echo json_encode(["success" => true, "message" => "File uploaded successfully! XP increased by 10."]);
+            } else {
+                http_response_code(500);
+                echo json_encode(["success" => false, "error" => "File uploaded, but XP update failed."]);
+            }
         } else {
-            echo "Failed to insert document.";
+            http_response_code(500);
+            echo json_encode(["success" => false, "error" => "Database insert failed"]);
         }
     } else {
-        echo "Invalid request.";
+        http_response_code(500);
+        echo json_encode(["success" => false, "error" => "File upload failed"]);
     }
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+} else {
+    http_response_code(405);
+    echo json_encode(["success" => false, "error" => "Invalid request method"]);
 }
 ?>

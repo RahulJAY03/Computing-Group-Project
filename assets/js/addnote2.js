@@ -62,7 +62,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
     }
 });
 
-
+//fetching category and modules
 document.addEventListener("DOMContentLoaded", function () {
     fetchCategories();
 
@@ -106,3 +106,30 @@ function fetchModules(categoryId) {
         })
         .catch(error => console.error("Error fetching modules:", error));
 }
+
+
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    let formData = new FormData();
+    formData.append("title", document.getElementById("title").value);
+    formData.append("description", document.getElementById("description").value);
+    formData.append("language", document.getElementById("language").value);
+    formData.append("docType", document.getElementById("docType").value);
+    formData.append("moduleId", document.getElementById("module").value);
+    formData.append("file", document.getElementById("fileInput").files[0]);
+
+    fetch("../api/auth/addfile.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("File uploaded successfully! XP increased by 10.");
+        } else {
+            alert("Upload failed: " + data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
