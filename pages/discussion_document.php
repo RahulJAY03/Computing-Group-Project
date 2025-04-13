@@ -47,6 +47,7 @@ if ($moduleName) {
   <?php
       include '../includes/navbar.php';  // Navbar include
       include '../includes/sidebar.php'; // Sidebar include
+      include '../api/chatbot/Chatbot.php'; // Include the Chatbot script here
   ?>
   
   <div class="container">
