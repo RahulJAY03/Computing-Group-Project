@@ -1,3 +1,38 @@
+<?php
+session_start();
+require_once '../config/db.php'; // Ensure this path is correct
+$currentUserEmail = $_SESSION['email'] ?? null;
+if (!$currentUserEmail) {
+    // Handle the case where the user is not logged in
+    echo "User not logged in.";
+    exit;
+}
+$collection = $db->users;
+
+// Fetch users sorted by XP descending
+$users = $collection->find([], [
+    'sort' => ['xp' => -1]
+]);
+
+$rank = 1; // Initialize rank counter
+$collection = $db->users;
+$usersCursor = $collection->find([], ['sort' => ['xp' => -1]]);
+$users = iterator_to_array($usersCursor);
+
+$currentUserXP = 0;
+
+foreach ($users as $user) {
+    if ($user['email'] === $currentUserEmail) {
+        $currentUserXP = $user['xp'] ?? 0;
+        break;
+    }
+}
+
+// Cap XP shown in the progress bar at 100
+$xpDisplay = min(100, $currentUserXP);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,13 +65,16 @@
 
     <!-- XP Progress Bar -->
     <div class="card p-3 mb-4">
-        <h5>Your journey so far</h5>
-        <div class="progress">
-            <div class="progress-bar progress-xp" role="progressbar" style="width: 56%;" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100">
-                556 XP
-            </div>
+    <h5>Your journey so far</h5>
+    <div class="progress">
+        <div class="progress-bar progress-xp" role="progressbar"
+            style="width: <?= $xpDisplay ?>%;" 
+            aria-valuenow="<?= $xpDisplay ?>" aria-valuemin="0" aria-valuemax="100">
+            <?= $currentUserXP ?> XP
         </div>
     </div>
+</div>
+
 
  <!-- League & Achievements in Horizontal Layout -->
 <div class="horizontal-cards">
@@ -92,37 +130,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><span class="rank-badge gold-rank">1</span> </td>
-                <td>Rahul JAY</td>
-                <td>1000 XP</td>
-                <td><button class="btn challenge-btn">Challenge</button></td>
-            </tr>
-            <tr>
-                <td><span class="rank-badge silver-rank">2</span> </td>
-                <td>Sara</td>
-                <td>998 XP</td>
-                <td><button class="btn challenge-btn">Challenge</button></td>
-            </tr>
-            <tr>
-                <td><span class="rank-badge bronze-rank">3</span> </td>
-                <td>Punchi Malith</td>
-                <td>999 XP</td>
-                <td><button class="btn challenge-btn">Challenge</button></td>
-            </tr>
-            <tr>
-                <td><span class="rank-badge">4</span></td>
-                <td>Soora Weera Gimhan</td>
-                <td>997 XP</td>
-                <td><button class="btn challenge-btn">Challenge</button></td>
-            </tr>
-            <tr>
-                <td><span class="rank-badge">5</span></td>
-                <td>Kudu Sunil (Ruchira)</td>
-                <td>995 XP</td>
-                <td><button class="btn challenge-btn">Challenge</button></td>
-            </tr>
-        </tbody>
+<?php foreach ($users as $user): ?>
+    <tr>
+        <td>
+            <span class="rank-badge 
+                <?php 
+                    if ($rank == 1) echo 'gold-rank'; 
+                    elseif ($rank == 2) echo 'silver-rank'; 
+                    elseif ($rank == 3) echo 'bronze-rank'; 
+                ?>">
+                <?= $rank ?>
+            </span>
+        </td>
+        <td><?= htmlspecialchars($user['fullName']) ?></td>
+        <td><?= $user['xp'] ?> XP</td>
+        <td><button class="btn challenge-btn">Challenge</button></td>
+    </tr>
+    <?php $rank++; ?>
+<?php endforeach; ?>
+</tbody>
+
     </table>
 </div>
 
