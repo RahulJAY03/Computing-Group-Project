@@ -30,6 +30,7 @@ if ($category) {
     <?php
         include '../includes/navbar.php';
         include '../includes/sidebar.php';
+        include '../api/chatbot/Chatbot.php'; // Include the Chatbot script here
     ?>
 
     <div class="container">

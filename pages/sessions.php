@@ -18,6 +18,7 @@
     <?php
         include '../includes/navbar.php';  //meee wageeeee karannnn
         include '../includes/sidebar.php'; //meee wageeeee karannnn
+        include '../api/chatbot/Chatbot.php'; // Include the Chatbot script here
     ?>
     
     
