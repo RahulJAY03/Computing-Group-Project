@@ -66,88 +66,95 @@ if ($moduleName) {
       <button class="tab-btn" onclick="toggleTab(this, 'discussion-content')">Discussion</button>
     </div>
 
-    <!-- Document Content (Visible by default) -->
-    <div id="document-content" class="tab-content">
-      <div class="filter-bar">
-          <span>30 Documents</span>
-          <button class="filter-btn"><i class="bi bi-funnel"></i> Filter</button>
-      </div>
-      <div class="document-list">
-          <div class="document-item">
-              <img src="../assets/images/pdf-image.png" alt="Document Thumbnail" class="doc-img">
-              <div class="document-info">
-                  <h3><a href="#">IntroductionToDb.pdf</a></h3>
-                  <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
-                  <div class="document-actions">
-                    <div class="left">
-                        <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
-                    </div>
-                   <div class="right">
-                        <button class="download-btn"><i class="bi bi-download"></i></button>
-                        <button class="view-btn"><i class="bi bi-eye"></i> View</button>
-                    </div>
-                </div>
+    <?php
+use MongoDB\BSON\ObjectId;
 
-              </div>
-          </div>
+$moduleId = (string) $module['_id'];
+$notesCursor = $db->notes->find([
+    'moduleId' => $moduleId
+]);
+$notes = iterator_to_array($notesCursor);
+?>
 
-          <div class="document-item">
-              <img src="../assets/images/pdf-image.png" alt="Document Thumbnail" class="doc-img">
-              <div class="document-info">
-                  <h3><a href="#">IntroductionToDb.pdf</a></h3>
-                  <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
-                  <div class="document-actions">
-                  <div class="left">
-                     <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
-                  </div>
-                  <div class="right">
-                     <button class="download-btn"><i class="bi bi-download"></i></button>
-                      <button class="view-btn"><i class="bi bi-eye"></i> View</button>
-                  </div>
-              </div>
+<!-- Document Content -->
+<div id="document-content" class="tab-content">
+  <div class="filter-bar">
+    <div class="filters">
+      <select id="docTypeFilter">
+        <option value="">All Types</option>
+        <option value="PDF">PDF</option>
+        <option value="DOCX">Document</option>
+        <option value="TXT">Image</option>
+        <option value="ZIP">ZIP</option>
+      </select>
 
-              </div>
-          </div>
+      <select id="languageFilter">
+        <option value="">All Languages</option>
+        <option value="english">English</option>
+        <option value="sinhala">Sinhala</option>
+      </select>
 
-          <div class="document-item">
-              <img src="../assets/images/pdf-image.png" alt="Document Thumbnail" class="doc-img">
-              <div class="document-info">
-                  <h3><a href="#">IntroductionToDb.pdf</a></h3>
-                  <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
-                  <div class="document-actions">
-                      <div class="left">
-                          <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
-                     </div>
-                      <div class="right">
-                          <button class="download-btn"><i class="bi bi-download"></i></button>
-                          <button class="view-btn"><i class="bi bi-eye"></i> View</button>
-                     </div>
-                  </div>
-
-              </div>
-          </div>
-
-          <div class="document-item">
-              <img src="../assets/images/pdf-image.png" alt="Document Thumbnail" class="doc-img">
-              <div class="document-info">
-                  <h3><a href="#">IntroductionToDb.pdf</a></h3>
-                  <p>Summaries | by Ruchira | Added: 2 weeks ago</p>
-                  <div class="document-actions">
-                  <div class="left">
-                     <button class="star-btn"><i class="bi bi-heart"></i> 5</button>
-                  </div>
-                  <div class="right">
-                      <button class="download-btn"><i class="bi bi-download"></i></button>
-                      <button class="view-btn"><i class="bi bi-eye"></i> View</button>
-                  </div>
-              </div>
-
-              </div>
-          </div>
-
-          <!-- Repeat for other documents as needed -->
-      </div>
+      <select id="sortFilter">
+        <option value="latest">Sort by Latest</option>
+        <option value="oldest">Sort by Oldest</option>
+      </select>
     </div>
+  </div>
+
+  <div id="notesContainer" class="document-list">
+    <?php if (empty($notes)): ?>
+      <p>No documents found for this module.</p>
+    <?php else: ?>
+      <?php foreach ($notes as $note): ?>
+        <?php
+          $title = htmlspecialchars($note['title']);
+          $desc = htmlspecialchars($note['description']);
+          $language = strtolower($note['language']);
+          $docType = strtoupper($note['doc_type']);
+          $filePath = $note['file_path'];
+          $uploadDate = $note['created_at']->toDateTime()->format("d M Y");
+          $timestamp = $note['created_at']->toDateTime()->getTimestamp();
+          $extension = strtolower(pathinfo($note['file_name'], PATHINFO_EXTENSION));
+          $iconPath = "../assets/images/default-doc.png";
+          $icons = [
+            'pdf' => '../assets/images/pdf.png',
+            'doc' => '../assets/images/doc.png',
+            'docx' => '../assets/images/doc.png',
+            'zip' => '../assets/images/zip.png',
+            'jpg' => '../assets/images/img.png',
+            'jpeg' => '../assets/images/img.png',
+            'png' => '../assets/images/img.png',
+          ];
+          if (array_key_exists($extension, $icons)) {
+            $iconPath = $icons[$extension];
+          }
+        ?>
+        <div class="document-item"
+             data-type="<?= $docType ?>"
+             data-lang="<?= $language ?>"
+             data-time="<?= $timestamp ?>">
+          <!-- Icon placed top-left corner -->
+          <img src="<?= $iconPath ?>" alt="Document Icon" class="doc-img">
+
+          <!-- Title centered on top, bold text -->
+          <div class="document-info">
+            <h3><a href="<?= $filePath ?>" target="_blank"><?= $title ?></a></h3>
+            <p class="desc"><?= $desc ?></p>
+            <div class="metadata">
+              <span><?= $docType ?> | <?= ucfirst($language) ?></span><br>
+              <span>Uploaded on: <?= $uploadDate ?></span>
+            </div>
+            <div class="document-actions">
+              <a href="<?= $filePath ?>" class="download-btn" download><i class="bi bi-download"></i></a>
+              <a href="<?= $filePath ?>" target="_blank" class="view-btn"><i class="bi bi-eye"></i> View</a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </div>
+</div>
+
 
     <!-- Discussion Content (Hidden by default) -->
     <div id="discussion-content" class="tab-content hidden">
@@ -264,5 +271,58 @@ if ($moduleName) {
   <script src="../assets/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/script.js"></script>
   <script src="../assets/js/discussion.js"></script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const docTypeFilter = document.getElementById('docTypeFilter');
+  const languageFilter = document.getElementById('languageFilter');
+  const sortFilter = document.getElementById('sortFilter');
+  const notesContainer = document.getElementById('notesContainer');
+
+  function applyFilters() {
+    const docType = docTypeFilter.value;
+    const language = languageFilter.value;
+    const sort = sortFilter.value;
+
+    const notes = Array.from(notesContainer.querySelectorAll('.document-item'));
+
+    // Filter logic
+    notes.forEach(note => {
+      const noteType = note.getAttribute('data-type');
+      const noteLang = note.getAttribute('data-lang');
+
+      let visible = true;
+
+      if (docType && noteType !== docType) visible = false;
+      if (language && noteLang !== language.toLowerCase()) visible = false;
+
+      if (visible) {
+        note.style.removeProperty('display'); // restores grid layout
+      } else {
+        note.style.display = 'none';
+      }
+    });
+
+    // Sorting logic
+    const visibleNotes = notes.filter(note => note.style.display !== 'none');
+    visibleNotes.sort((a, b) => {
+      const timeA = parseInt(a.getAttribute('data-time'));
+      const timeB = parseInt(b.getAttribute('data-time'));
+      return sort === 'latest' ? timeB - timeA : timeA - timeB;
+    });
+
+    // Append in new order
+    visibleNotes.forEach(note => notesContainer.appendChild(note));
+  }
+
+  // Listen for filter changes
+  docTypeFilter.addEventListener('change', applyFilters);
+  languageFilter.addEventListener('change', applyFilters);
+  sortFilter.addEventListener('change', applyFilters);
+});
+</script>
+
+
+
 </body>
 </html>

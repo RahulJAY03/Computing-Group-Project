@@ -85,6 +85,7 @@
                                         <option value="PDF">PDF</option>
                                         <option value="images">Image</option>
                                         <option value="Document">Document</option>
+                                        <option value="zip">ZIP File</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
