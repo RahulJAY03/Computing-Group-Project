@@ -123,3 +123,17 @@ document.addEventListener("DOMContentLoaded", function () {
         xpElement.innerText = "Error";
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/Cgp-sara/api/auth/getProfileImage.php') // ✅ removed the extra quote
+        .then(response => response.json())
+        .then(data => {
+            if (data.profile_image) {
+                document.getElementById('profile-icon').src = data.profile_image;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching profile image:', error);
+        });
+});
+

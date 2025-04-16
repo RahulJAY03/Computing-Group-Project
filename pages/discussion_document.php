@@ -1,3 +1,19 @@
+<?php
+require_once '../config/db.php';
+session_start();
+
+$userProfilePic = '/Cgp-sara/uploads/profile_pictures/default.png'; // fallback image
+
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+    $user = $db->users->findOne(['email' => $email]);
+
+    if ($user && isset($user['profile_image']) && !empty($user['profile_image'])) {
+        $userProfilePic = '/Cgp-sara/' . $user['profile_image'];
+    }
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -154,125 +170,125 @@ $notes = iterator_to_array($notesCursor);
     <?php endif; ?>
   </div>
 </div>
+<!-- PHP Logic -->
+<?php
+function getUserInfo($db, $userId) {
+    try {
+        $user = $db->users->findOne(['_id' => new MongoDB\BSON\ObjectId($userId)]);
+        return [
+            'name' => $user['fullName'] ?? 'Unknown User',
+            'xp' => $user['xp'] ?? 0,
+            'avatar' => isset($user['profile_image']) && !empty($user['profile_image'])
+                ? '/Cgp-sara/' . $user['profile_image']
+                : '/Cgp-sara/uploads/profile_pictures/default.png'
+        ];
+    } catch (Exception $e) {
+        return [
+            'name' => 'Unknown User',
+            'xp' => 0,
+            'avatar' => '/Cgp-sara/uploads/profile_pictures/default.png'
+        ];
+    }
+}
 
+$discussionPosts = $db->discussionPosts->find(['moduleId' => $module['_id']]);
+?>
 
-    <!-- Discussion Content (Hidden by default) -->
-    <div id="discussion-content" class="tab-content hidden">
-      <!-- Create a Post -->
-      <div class="create-post">
+<!-- Discussion Content -->
+<div id="discussion-content" class="tab-content" style="display: none;">
+    <!-- Create Post Section -->
+    <div class="create-post">
         <h2>Create a post</h2>
-        <div class="post-input-row">
-          <!-- Avatar -->
-          <img 
-            src="../assets/images/girl.png" 
-            alt="Avatar" 
-            class="avatar" 
-          />
-          <!-- Input Field -->
-          <input type="text" placeholder="Ask a question..." />
-          <!-- Icons on the right -->
-          <div class="input-icons">
-            <i class="bi bi-camera"></i>
-            <a href="#" class="link-btn" title="Attach Link">
-              <i class="bi bi-link"></i>
-            </a>
-            <i class="bi bi-send-fill"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sample Post Card -->
-      <div class="post-card">
-        <div class="post-header">
-          <img 
-            src="../assets/images/girl.png" 
-            alt="Avatar" 
-            class="avatar"
-          />
-          <div class="post-user-info">
-            <div class="user-top-row">
-              <span class="user-name">John Doe</span>
-              <span class="user-xp">4</span>
-              <span class="time-ago">1 year ago</span>
+        <form id="createPostForm">
+            <div class="post-input-row">
+                <img src="<?= $userProfilePic ?>" alt="Avatar" class="avatar" />
+                <input type="text" name="content" placeholder="Ask a question..." required />
+                <input type="hidden" name="moduleId" value="<?= $moduleId ?>" />
+                <div class="input-icons">
+                    <i class="bi bi-camera"></i>
+                    <a href="#" class="link-btn" title="Attach Link"><i class="bi bi-link"></i></a>
+                    <button type="submit" class="send-btn"><i class="bi bi-send-fill"></i></button>
+                </div>
             </div>
-            <div class="user-bottom-row">
-              <i class="bi bi-file-earmark-text"></i> 
-              <span class="post-category">Category Name</span>
-            </div>
-          </div>
-        </div>
-        <div class="post-content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac mauris quis sapien ultricies tristique.</p>
-        </div>
-        <div class="post-footer">
-          
-          <button class="comment-count" onclick="toggleComments()">
-            See all 2 comments
-          </button>
-        </div>
-      <!-- Comments Section (Hidden by default) -->
-      <div class="comments-section hidden" id="commentsSection">
-          <!-- Comment 1 -->
-          <div class="comment">
-            <img 
-              src="../assets/images/girl.png" 
-              alt="Avatar" 
-              class="avatar"
-            />
-            <div class="comment-body">
-              <div class="comment-header">
-                <span class="comment-author">Alice</span>
-                <span class="comment-xp">12</span>
-                <span class="comment-time">10 months ago</span>
-              </div>
-              <p class="comment-text">Nice post! Very informative.</p>
-              
-            </div>
-          </div>
-
-          <!-- Comment 2 -->
-          <div class="comment">
-            <img 
-              src="../assets/images/girl.png" 
-              alt="Avatar" 
-              class="avatar"
-            />
-            <div class="comment-body">
-              <div class="comment-header">
-                <span class="comment-author">Bob</span>
-                <span class="comment-xp">2</span>
-                <span class="comment-time">8 months ago</span>
-              </div>
-              <p class="comment-text">Can you explain more on the last topic?</p>
-              
-            </div>
-          </div>
-
-          <!-- Add a Comment -->
-          <div class="add-comment">
-            <img 
-              src="../assets/images/girl.png" 
-              alt="Avatar" 
-              class="avatar"
-            />
-            <div class="comment-input-wrapper">
-              <input type="text" placeholder="Comment..." />
-              <button class="send-btn" title="Send">
-                <i class="bi bi-send-fill"></i>
-              </button>
-            </div>
-          </div>
-        </div>  
-      </div>
+        </form>
     </div>
-  </div>
 
-  <!-- Scripts -->
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/script.js"></script>
-  <script src="../assets/js/discussion.js"></script>
+    <!-- Posts Loop -->
+    <?php foreach ($discussionPosts as $post): 
+        $userInfo = getUserInfo($db, $post['userId']);
+    ?>
+    <div class="post-card fade-in">
+        <div class="post-header">
+            <img src="<?= $userInfo['avatar'] ?>" alt="Avatar" class="avatar" />
+            <div class="post-user-info">
+                <div class="user-top-row">
+                    <span class="user-name"><?= htmlspecialchars($userInfo['name']) ?></span>
+                    <span class="user-xp"><?= $userInfo['xp'] ?> XP</span>
+                    <span class="time-ago">
+                        <?= isset($post['created_at']) ? date("F j, Y", $post['created_at']->toDateTime()->getTimestamp()) : 'Date not set' ?>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-  <script>
+        <div class="post-content">
+            <p><?= htmlspecialchars($post['content'] ?? '') ?></p>
+        </div>
+
+        <div class="post-footer">
+            <button class="comment-count" onclick="toggleComments(this)">
+                See all comments
+            </button>
+        </div>
+
+        <div class="comments-section hidden">
+            <?php
+            $comments = $db->discussionComments->find(['postId' => $post['_id']]);
+            $hasComments = false;
+            foreach ($comments as $comment):
+                $hasComments = true;
+                $commentUser = getUserInfo($db, $comment['userId']);
+            ?>
+                <div class="comment">
+                    <img src="<?= $commentUser['avatar'] ?>" alt="Avatar" class="avatar" />
+                    <div class="comment-body">
+                        <div class="comment-header">
+                            <span class="comment-author"><?= htmlspecialchars($commentUser['name']) ?></span>
+                            <span class="comment-xp"><?= $commentUser['xp'] ?> XP</span>
+                            <span class="comment-time">
+                                <?= $comment['commentDate']->toDateTime()->format("F j, Y, g:i A") ?>
+                            </span>
+                        </div>
+                        <p class="comment-text"><?= htmlspecialchars($comment['text']) ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <?php if (!$hasComments): ?>
+                <p class="no-comments">No comments yet.</p>
+            <?php endif; ?>
+
+            <!-- Add Comment Form -->
+            <form class="add-comment-form" data-post-id="<?= $post['_id'] ?>">
+                <div class="add-comment">
+                    <img src="<?= $userProfilePic ?>" alt="Avatar" class="avatar" />
+                    <div class="comment-input-wrapper">
+                        <input type="text" name="commentText" placeholder="Comment..." required />
+                        <button type="submit" class="send-btn" title="Send">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- JS Scripts -->
+
+<!-- 1. Filters (Sorting and Search Filters) -->
+<script>
 document.addEventListener('DOMContentLoaded', function () {
   const docTypeFilter = document.getElementById('docTypeFilter');
   const languageFilter = document.getElementById('languageFilter');
@@ -322,7 +338,99 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<!-- 2. Tab Switching (Handles Switching Between Tabs for the Post/Document) -->
+<script>
+function toggleTab(button, tabId) {
+  const tabs = document.querySelectorAll('.tab-content');
+  const tabButtons = document.querySelectorAll('.tab-btn');
 
+  // Hide all tabs and remove active class
+  tabs.forEach(tab => tab.style.display = 'none');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+
+  // Show selected tab and mark button active
+  document.getElementById(tabId).style.display = 'block';
+  if (button) button.classList.add('active');
+}
+</script>
+
+<!-- 3. Handle Post Submission (For Creating New Post) -->
+<script>
+  const createPostForm = document.getElementById('createPostForm');
+
+  createPostForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Get the form data, including the hidden moduleId
+    const formData = new FormData(createPostForm);
+
+    const res = await fetch('/Cgp-sara/api/auth/create_post.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      alert(data.message);
+      createPostForm.reset();
+      // Optional: reload posts or append the new post dynamically
+      location.href = window.location.pathname + window.location.search + '#discussion';
+
+    } else {
+      alert(data.message);
+    }
+  });
+</script>
+
+<!-- 4. Handle Comment Submission -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.add-comment-form').forEach(form => {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const postId = form.getAttribute('data-post-id');
+        const input = form.querySelector('input[name="commentText"]');
+        const text = input.value.trim();
+
+        if (!text) return;
+
+        const formData = new FormData();
+        formData.append('postId', postId);
+        formData.append('text', text);
+
+        const res = await fetch('/Cgp-sara/api/auth/add_comment.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          input.value = '';
+          alert('Comment added!');
+          location.reload(); // Reload the page to show the new comment, or update the post dynamically
+        } else {
+          alert('Error: ' + data.message);
+        }
+      });
+    });
+  });
+</script>
+
+<!-- 5. Toggle Comments Visibility (For "See all Comments" Button) -->
+<script>
+function toggleComments(button) {
+  const commentsSection = button.closest('.post-card').querySelector('.comments-section');
+  if (commentsSection) {
+    commentsSection.classList.toggle('hidden');
+    button.textContent = commentsSection.classList.contains('hidden') ? 'See all comments' : 'Hide comments';
+  }
+}
+</script>
+<script src="../assets/js/script.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

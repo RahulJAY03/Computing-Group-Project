@@ -15,8 +15,7 @@
         <div class="d-flex align-items-center" style="position: relative;">
             <!-- Highlighted XP -->
             <span class="xp-highlight" id="xp-value">Loading XP...</span>
-            
-            <img src="../assets/images/profile.jpg" alt="Profile" class="profile-icon" onclick="toggleProfilePopup()">
+            <img id="profile-icon" src="../assets/images/profile.jpg" alt="Profile" class="profile-icon" onclick="toggleProfilePopup()">
 
             <!-- Profile Popup Dropdown -->
             <div class="profile-popup" id="profilePopup">
