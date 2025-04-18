@@ -127,7 +127,11 @@ $notes = iterator_to_array($notesCursor);
           $desc = htmlspecialchars($note['description']);
           $language = strtolower($note['language']);
           $docType = strtoupper($note['doc_type']);
-          $filePath = $note['file_path'];
+          $originalPath = $note['file_path'];
+          $cleanPath = str_replace('../../', '', $originalPath);  // removes the '../../'
+          $fixedFilePath = '/cgp-sara/' . $cleanPath;
+          
+
           $uploadDate = $note['created_at']->toDateTime()->format("d M Y");
           $timestamp = $note['created_at']->toDateTime()->getTimestamp();
           $extension = strtolower(pathinfo($note['file_name'], PATHINFO_EXTENSION));
@@ -160,10 +164,15 @@ $notes = iterator_to_array($notesCursor);
               <span><?= $docType ?> | <?= ucfirst($language) ?></span><br>
               <span>Uploaded on: <?= $uploadDate ?></span>
             </div>
+            
+
             <div class="document-actions">
-              <a href="<?= $filePath ?>" class="download-btn" download><i class="bi bi-download"></i></a>
-              <a href="<?= $filePath ?>" target="_blank" class="view-btn"><i class="bi bi-eye"></i> View</a>
-            </div>
+  <a href="<?= $fixedFilePath ?>" class="download-btn" download><i class="bi bi-download"></i></a>
+  <a href="<?= $fixedFilePath ?>" target="_blank" class="view-btn"><i class="bi bi-eye"></i> View</a>
+</div>
+
+
+
           </div>
         </div>
       <?php endforeach; ?>
