@@ -1,177 +1,148 @@
-/* ===== General Styles ===== */
+/* Updated General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f4f9; /* Softer background */
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
 }
 
-/* ===== Sessions Container ===== */
+/* Updated Session Container */
 .sessions-container {
-    padding: 30px;
-    max-width: 100%;
-    margin-left: 300px;
-    margin-right: auto;
+    padding: 40px;
+    margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Heading ===== */
-.session-title {
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
+.sessions-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.create-session-btn {
+    background-color: #5dd398; /* Modern blue */
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.create-session-btn:hover {
+    background-color: #37846b;
+}
+
+.page-title {
+    font-size: 36px; /* Larger font size */
+    font-weight: 700; /* Bolder font */
+    color: #222; /* Darker text */
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* ===== Sessions Grid ===== */
+/* Updated Category Filter */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.category-filter label {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #333; /* Darker label text */
+}
+
+.category-filter select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9; /* Softer background */
+    transition: border-color 0.3s ease;
+}
+
+.category-filter select:focus {
+    border-color: #007bff; /* Highlight on focus */
+}
+
+/* Updated Sessions Grid */
 .sessions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Larger cards */
+    gap: 30px; /* More spacing */
     justify-content: center;
 }
 
-/* ===== Session Card ===== */
+/* Updated Session Cards */
 .session-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 25px; /* More padding */
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Softer shadow */
     text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px;
+    transition: all 0.3s ease-in-out;
     position: relative;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Hover Effect */
 .session-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px); /* More pronounced hover effect */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
-/* Text */
+.session-topic {
+    font-size: 24px; /* Larger font size */
+    font-weight: 700; /* Bolder font */
+    color: #222; /* Darker text */
+    margin-bottom: 15px;
+}
+
 .session-card p {
-    margin: 5px 0;
     font-size: 16px;
     color: #555;
+    margin: 5px 0;
 }
 
-/* ===== Join Button ===== */
+/* Updated Join Button */
 .join-btn {
-    background-color: #28a745;
+    background-color: #63d9a0; /* Modern blue */
     color: white;
-    border: none;
     padding: 12px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 15px;  
-    right: 15px;
-    width: 120px;
-    text-align: center;
     font-size: 16px;
-    transition: background-color 0.3s ease-in-out;
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .join-btn:hover {
-    background-color: #218838;
+    background-color: #3cc678;
 }
 
-/* Category Filter */
-.category-filter {
-    display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Aligns items vertically */
-    margin-bottom: 20px;
-    gap: 10px; /* Adds spacing between label and select */
-}
-
-/* Label Styles */
-.category-filter label {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* Dropdown Styles */
-.category-filter select {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-
-/* ===== Responsive Adjustments ===== */
+/* Updated Responsive Styles */
 @media (max-width: 992px) {
     .sessions-container {
         margin-left: 0;
-        padding: 20px;
-    }
-    .sessions-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .join-btn {
-        width: 100px;
-        font-size: 14px;
     }
 }
 
 @media (max-width: 768px) {
-    .sessions-container {
-        padding: 15px;
-    }
     .sessions-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    .session-card {
-        min-height: 180px;
-        padding: 15px;
-    }
-    .join-btn {
-        width: 90px;
-        font-size: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
 @media (max-width: 480px) {
     .sessions-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-    .session-card {
-        min-height: 160px;
-        padding: 10px;
-    }
-    .join-btn {
-        width: 85px;
-        font-size: 13px;
-        padding: 8px;
-    }
-}
-.sessions-header {
-    display: flex;
-    justify-content: flex-end; /* Aligns items to the right */
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-/* ===== Create Session Button ===== */
-.create-session-btn {
-    background-color: #28a745; /* Green color */
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-left: auto; /* Pushes button to the right */
-}
-
-.create-session-btn:hover {
-    background-color: #218838; /* Darker green on hover */
 }

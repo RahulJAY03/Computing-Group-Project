@@ -14,48 +14,96 @@
     <title>sessions</title>
 </head>
 <body>
+   <?php
+       include '../includes/navbar.php';
+       include '../includes/sidebar.php';
+       include '../api/chatbot/Chatbot.php';
+   ?>
+
+   <div class="container">
+      <h1>Create a Session</h1>
+
+      <form action="../api/zoom/createSession.php" method="POST" class="form-container">
+        <label for="category">Select a Category</label>
+        <select id="category" name="category">
+            <option value="">Select a category</option>
+        </select><br>
+
+        <label for="module">Select a Module</label>
+        <select id="module" name="module">
+            <option value="">Select a module</option>
+        </select><br>
+
+        <label for="topic">Topic :</label>
+        <input type="text" id="topic" name="topic"><br>
+
+        <label for="hosted">Hosted by :</label>
+        <input type="text" id="hosted" name="hosted"><br>
+
+        <label for="duration">Duration :</label>
+        <input type="text" id="duration" name="duration"><br>
+
+        <label for="date">Date :</label>
+        <input type="date" id="date" name="date"><br>
+
+        <label for="time">Time :</label>
+        <input type="time" id="time" name="time"><br>
+
+        <label for="meetingLink">Meeting Link:</label>
+        <input type="url" id="meetingLink" name="meetingLink"><br>
+
+        <button type="submit">Create</button>
+      </form>
+   </div>
+
+   <script>
+   document.addEventListener('DOMContentLoaded', function () {
+       const categorySelect = document.getElementById('category');
+       const moduleSelect = document.getElementById('module');
+
+       // Load categories
+       fetch('../api/auth/fetch_data.php?action=getCategories')
+           .then(res => res.json())
+           .then(data => {
+               categorySelect.innerHTML = '<option value="">Select a category</option>';
+               data.forEach(category => {
+                   categorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+               });
+           });
+
+       // Load modules when category changes
+       categorySelect.addEventListener('change', function () {
+           const selectedCategoryId = this.value;
+           moduleSelect.innerHTML = '<option value="">Loading modules...</option>';
+
+           fetch(`../api/auth/fetch_data.php?action=getModules&categoryId=${selectedCategoryId}`)
+               .then(res => res.json())
+               .then(data => {
+                   moduleSelect.innerHTML = '<option value="">Select a module</option>';
+                   data.forEach(module => {
+                       moduleSelect.innerHTML += `<option value="${module.id}">${module.name}</option>`;
+                   });
+               });
+       });
+   });
+   </script>
+
    
-    <?php
-        include '../includes/navbar.php';  //meee wageeeee karannnn
-        include '../includes/sidebar.php'; //meee wageeeee karannnn
-        include '../api/chatbot/Chatbot.php'; // Include the Chatbot script here
-    ?>
-     <div class="container">
-        <h1>Create a Session</h1>
-        <div class="form-container">
-            <label for="category">Select a category</label>
-            <select id="category">
-                <option value="">Select a category</option>
-                <option value="category1">IT</option>
-                <option value="category2">Business</option>
-                <option value="category2">Science</option>
-            </select><br>
+<script>
+        // Listen for form submission
+        document.getElementById('createSessionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
 
-            <label for="topic">Topic :</label>
-            <input type="text" id="topic"><br>
+            // Show success alert
+            alert('Session created successfully!');
 
-            <label for="hosted">Hosted by :</label>
-            <input type="text" id="hosted"><br>
+            // After alert is closed, refresh the page
+            location.reload();
+        });
+    </script>
 
-            <label for="duration">Duration :</label>
-            <input type="text" id="duration"><br>
-
-            <label for="date">Date :</label>
-            <input type="date" id="date"><br>
-
-            <label for="time">Time :</label>
-            <input type="time" id="time"><br>
-
-            <button type="submit">Create</button>
-        </div>
-    </div>
-   
-
-    <script src="../assets/js/script.js"></script>
-
-
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-
+   <script src="../assets/js/script.js"></script>
+   <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
