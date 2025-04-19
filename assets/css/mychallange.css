@@ -1,0 +1,544 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-content{
+  margin-left: 280px;
+}
+
+.container {
+  padding: 30px;
+  max-width: 80%;
+  margin-left: 300px;
+  margin-right: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+:root {
+  --primary-color: #2ecc71; /* Green */
+  --primary-dark: #27ae60; /* Darker green for hover states */
+  --secondary-color: #3498db;
+  --success-color: #2ecc71;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  --light-color: #f8f9fa;
+  --dark-color: #2c3e50;
+  --gray-color: #6c757d;
+  --light-gray: #dee2e6;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Top header */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #fff;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo i {
+  color: var(--primary-color);
+  font-size: 24px;
+}
+
+.logo h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-box {
+  position: relative;
+  width: 240px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--light-gray);
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15); /* Updated green shadow */
+}
+
+.search-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-color);
+}
+
+.notification {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification i {
+  font-size: 20px;
+  color: var(--gray-color);
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--danger-color);
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid var(--light-gray);
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1280px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* Page Title with Icon */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-title i {
+  color: var(--primary-color);
+  font-size: 28px;
+}
+
+.new-challenge-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.new-challenge-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Tabs */
+.main-tabs, .status-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.tab, .status-tab {
+  padding: 10px 20px;
+  border: none;
+  background-color: #f1f5f9;
+  color: var(--gray-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab:hover, .status-tab:hover {
+  background-color: #e2e8f0;
+}
+
+.tab.active, .status-tab.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.status-tab .count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.status-tab:not(.active) .count {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Card Group */
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 30px 24px 24px; /* Increased top padding to make room for status */
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid var(--light-gray);
+  margin-top: 10px; /* Added margin to ensure status badge visibility */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Challenge Type - Updated Style without Icon */
+.challenge-type {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+/* Player Area - Fixed Image Positioning */
+.top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  padding-top: 15px; /* Increased padding at top */
+}
+
+.player {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px; /* Add padding to ensure space between players */
+}
+
+.player img {
+  width: 65px; /* Slightly reduced from 70px */
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1; /* Ensure proper stacking */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover .player img {
+  transform: translateY(-3px); /* Reduced from -8px to prevent overlap */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.player p {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.xp {
+  font-weight: 400;
+  color: var(--primary-color);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.vs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+}
+
+.vs {
+  font-weight: bold;
+  color: var(--gray-color);
+  font-size: 16px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Status Badge - Fixed positioning */
+.status {
+  position: absolute;
+  top: 5px; /* Move it slightly above the card */
+  right: 15px;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10; /* Ensure status is above other elements */
+}
+
+.status.active {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: var(--primary-color);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.status.completed {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: var(--secondary-color);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.status.pending {
+  background-color: rgba(243, 156, 18, 0.15);
+  color: var(--warning-color);
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+/* Info Text */
+.info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--gray-color);
+  margin-bottom: 16px;
+}
+
+.info div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info i {
+  font-size: 14px;
+}
+
+.starting {
+  font-size: 13px;
+  color: var(--warning-color);
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* Progress */
+.progress-container {
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--gray-color);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.accept, .decline {
+  padding: 10px 0;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.accept {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: var(--primary-color);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.accept:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.decline {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: var(--danger-color);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.decline:hover {
+  background-color: var(--danger-color);
+  color: white;
+  border-color: var(--danger-color);
+  transform: translateY(-2px);
+}
+
+/* Remove card-action-btn and view-details styles as they are no longer needed */
+.card-action-btn,
+.active-card-btn,
+.completed-card-btn,
+.view-details,
+.completed-btn {
+  display: none;
+}
+
+/* Result */
+.result {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--success-color);
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.xp-gain {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .top-header {
+    padding: 16px 20px;
+  }
+  
+  .search-box {
+    display: none;
+  }
+  
+  .card-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .new-challenge-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-tabs, .status-tabs {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .tab, .status-tab {
+    white-space: nowrap;
+  }
+}

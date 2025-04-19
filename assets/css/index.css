@@ -1,0 +1,623 @@
+/* Modern Dashboard CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+
+
+/* Add left margin to content-wrapper to prevent it from going under the sidebar */
+.content-wrapper {
+  margin-left: 250px; /* Adjust this value based on the width of your sidebar */
+}
+
+:root {
+  --primary: #10b981;
+  --primary-light: #34d399;
+  --primary-dark: #059669;
+  --secondary: #047857;
+  --secondary-light: #065f46;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --bg-primary: #f0fdf4;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-accent: #ecfdf5;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  animation: fadeIn 0.6s ease-in;
+  padding-top: 0; /* Remove padding for navbar */
+}
+
+/* Hero Section - adjust width to match other sections */
+.hero {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  color: white;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-lg);
+  max-width: 1400px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.hero-content h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.hero-content p {
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+.date {
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-left: 0.25rem;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  min-width: 120px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+}
+
+.stat-card i {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.stat-info span {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: block;
+}
+
+.stat-info p {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+ 
+}
+
+.notes-section, .sessions-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.notes-section {
+  flex: 2;
+  min-width: 320px;
+}
+
+.sessions-section {
+  flex: 1;
+  min-width: 320px;
+}
+
+.notes-section:hover, .sessions-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.notes-header, .sessions-header, .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.notes-header h2, .sessions-header h2, .section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notes-header a, .sessions-header a {
+  font-size: 0.875rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.notes-header a:hover, .sessions-header a:hover {
+  color: var(--primary-dark);
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.note-card {
+  background: var(--bg-accent);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  background: white;
+}
+
+.note-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary-light);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0 var(--radius-md) 0 var(--radius-sm);
+}
+
+.note-card h3 {
+  font-size: 1.1rem;
+  margin: 0.75rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.note-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.note-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.note-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.view {
+  background: var(--primary);
+  color: white;
+}
+
+.view:hover {
+  background: var(--primary-dark);
+}
+
+.download {
+  background: var(--bg-accent);
+  color: var(--text-primary);
+}
+
+.download:hover {
+  background: #e5e7eb;
+}
+
+/* Session Cards */
+.session-card {
+  background: var(--bg-accent);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+}
+
+.session-card:hover {
+  background: white;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.session-time {
+  text-align: center;
+  min-width: 50px;
+}
+
+.session-time .time {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--primary);
+  display: block;
+}
+
+.session-time .day {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.session-info {
+  flex: 1;
+}
+
+.session-info h4 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.session-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.session-participants {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatars img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: -8px;
+}
+
+.avatars img:first-child {
+  margin-left: 0;
+}
+
+.session-participants span {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.join {
+  background: var(--secondary);
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.join:hover {
+  background: var(--secondary-light);
+  transform: scale(1.05);
+}
+
+/* Challenge Section */
+.challenge-section {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.new-challenge-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.new-challenge-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.challenge-card {
+  background: var(--bg-secondary);
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.challenge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-lg);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status.active {
+  background-color: rgba(16, 185, 129, 0.15); /* Transparent green */
+  color: #10b981; /* Green */
+}
+
+.status.pending {
+  background-color: rgba(239, 68, 68, 0.15); /* Transparent red */
+  color: #ef4444; /* Red */
+}
+
+.status.completed {
+  background-color: rgba(59, 130, 246, 0.15); /* Transparent blue */
+  color: #3b82f6; /* Blue */
+}
+
+.challenge-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.stat span {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-divider {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.progress {
+  background: #e5e7eb;
+  height: 6px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.progress div {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.5s;
+}
+
+.challenge-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.challenge-footer small {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.view-detail {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-detail:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .quick-stats {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+  
+  .search-bar {
+    display: none;
+  }
+  
+  .main-content, .challenges-grid {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  
+  .notes-section, .sessions-section {
+    flex: 1 1 100%;
+  }
+  
+  .challenge-section {
+    margin: 1.5rem 1rem;
+  }
+  
+  .hero {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .challenges-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .session-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .session-time {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+}

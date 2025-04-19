@@ -28,6 +28,9 @@ $categories = $collection->find(); // Fetch all categories
             <a href="leaderboard.php" class="nav-link text-black">
                 <i class="bi bi-trophy me-2"></i> Leaderboard
             </a>
+            <a href="mychallange.php" class="nav-link text-black">
+                <i class="	bi bi-joystick me-2"></i> My Challenges
+            </a>
         </div>
 
         <!-- Add Button -->
@@ -66,6 +69,9 @@ $categories = $collection->find(); // Fetch all categories
             </a>
             <a href="leaderboard.php" class="nav-link text-black">
                 <i class="bi bi-trophy me-2"></i> Leaderboard
+            </a>
+            <a href="mychallange.php" class="nav-link text-black">
+                <i class="	bi bi-joystick me-2"></i> My Challenges
             </a>
         </div>
 
