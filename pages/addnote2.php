@@ -20,8 +20,8 @@
     
     <div class="content">
     <div class="main-content">
-        <h2><strong>Upload on <br>The Kuppiya</strong></h2>
-        <p>Earn <span><img src="../assets/images/coin7.png" alt="coin"></span> credits by uploading and sharing your study notes</p>
+        <h2><strong>Upload on The Kuppiya</strong></h2>
+        <p>Get 10XP by uploading and sharing your study notes</p>
 
         <!-- File Upload Form -->
         <form id="uploadForm" action="../api/auth/addfile.php" method="POST" enctype="multipart/form-data">

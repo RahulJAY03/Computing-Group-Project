@@ -38,7 +38,7 @@ $categories = $collection->find(); // Fetch all categories
    style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
    onmouseover="this.style.backgroundColor='#62d677'" 
    onmouseout="this.style.backgroundColor='#74E685'">
-    + Contribute
+    + Add Notes
 </a>
 
     </div>
@@ -80,7 +80,7 @@ $categories = $collection->find(); // Fetch all categories
             style="font-size: 18px; background-color: #74E685; color: black; font-weight: bold; border-radius: 18px;"
             onmouseover="this.style.backgroundColor='#62d677'" 
             onmouseout="this.style.backgroundColor='#74E685'">
-            + Contribute
+            + Add Notes
         </button>
     </div>
 </div>
