@@ -542,3 +542,15 @@ body {
     white-space: nowrap;
   }
 }
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.accept-btn,
+.decline-btn {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}

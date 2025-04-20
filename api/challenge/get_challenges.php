@@ -26,7 +26,7 @@ if (!$user) {
 $userId = (string) $user['_id'];
 log_debug("User ID: $userId");
 
-// Fetch challenges where user is involved
+// Fetch challenges where user is involved, with all statuses
 $challengesCursor = $db->xpChallenges->find([  // Change 'challenges' to 'xpChallenges'
     '$or' => [
         ['challengerId' => new MongoDB\BSON\ObjectId($userId)],  // Convert userId to ObjectId for querying
@@ -60,25 +60,27 @@ foreach ($challengesCursor as $challenge) {
     $challengedImage = $baseUrl . ltrim($challenged['profile_image'], '/');
 
     $data[] = [
+        '_id' => (string) $challenge['_id'],  // Ensure challenge _id is included
         'status' => $challenge['status'],
         'startXP' => $challenge['startXP'] ?? [],
         'startTime' => $challenge['startTime'] ?? null,
         'durationHours' => $challenge['durationHours'] ?? null,
         'winnerId' => $challenge['winnerId'] ?? null,
         'challenger' => [
-            'id' => (string)$challengerObjId,  // Store as string for easier display
+            'id' => (string)$challengerObjId,
             'name' => $challenger['fullName'],
             'xp' => $challenger['xp'] ?? 0,
-            'profile_image' => $challengerImage // Use full URL for image
+            'profile_image' => $challengerImage
         ],
         'challenged' => [
-            'id' => (string)$challengedObjId,  // Store as string for easier display
+            'id' => (string)$challengedObjId,
             'name' => $challenged['fullName'],
             'xp' => $challenged['xp'] ?? 0,
-            'profile_image' => $challengedImage // Use full URL for image
+            'profile_image' => $challengedImage
         ]
     ];
 }
 
 log_debug("Total challenges found: " . count($data));
 echo json_encode(['success' => true, 'challenges' => $data]);
+
