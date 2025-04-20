@@ -144,7 +144,16 @@ $xpDisplay = min(100, $currentUserXP);
         </td>
         <td><?= htmlspecialchars($user['fullName']) ?></td>
         <td><?= $user['xp'] ?> XP</td>
-        <td><button class="btn challenge-btn">Challenge</button></td>
+        <td>
+  <button 
+    class="btn challenge-btn" 
+    data-user-id="<?= (string)$user['_id'] ?>"
+    <?= $user['email'] === $currentUserEmail ? 'disabled' : '' ?>
+  >
+    Challenge
+  </button>
+</td>
+
     </tr>
     <?php $rank++; ?>
 <?php endforeach; ?>
@@ -156,6 +165,44 @@ $xpDisplay = min(100, $currentUserXP);
 
 <script src="../assets/js/script.js"></script>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+  const currentUserId = "<?= (string)$db->users->findOne(['email' => $currentUserEmail])['_id'] ?>";
+</script>
+<script>
+document.querySelectorAll('.challenge-btn').forEach(button => {
+    button.addEventListener('click', async () => {
+        const challengedId = button.getAttribute('data-user-id');
+
+        try {
+            const res = await fetch('../api/challenge/challenge.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    challengerId: currentUserId,
+                    challengedId: challengedId
+                })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert("Challenge sent successfully!");
+                // Optional: Disable the button or update UI
+                button.disabled = true;
+                button.innerText = "Challenged";
+            } else {
+                alert("Failed to send challenge: " + (data.error || "Unknown error"));
+            }
+        } catch (err) {
+            console.error(err);
+            alert("An error occurred while sending the challenge.");
+        }
+    });
+});
+</script>
+
 
 </body>
 </html>

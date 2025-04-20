@@ -1,184 +1,103 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Tab functionality
   const tabButtons = document.querySelectorAll(".tab");
-  const statusButtons = document.querySelectorAll(".status-tab");
-  const cards = document.querySelectorAll(".card");
+  const container = document.querySelector(".card-group");
 
-  // Toggle main tabs (All, Active, Completed, Pending)
+  // Attach event listeners for tab filtering
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      // Reset active class
       tabButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Get the tab type
-      const tabType = btn.textContent.trim().toLowerCase();
-      
-      // Filter cards based on selected tab
-      filterCards(tabType);
+      const tabType = btn.getAttribute("data-status").toLowerCase();
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach(card => {
+        const show = tabType === "all" || card.classList.contains(tabType);
+        card.style.display = show ? "block" : "none";
+      });
     });
   });
 
-  // Filter cards based on the selected tab
-  function filterCards(tabType) {
-    cards.forEach(card => {
-      if (tabType.includes("all")) {
-        card.style.display = "block";
-      } else if (tabType.includes("active") && card.classList.contains("active")) {
-        card.style.display = "block";
-      } else if (tabType.includes("completed") && card.classList.contains("completed")) {
-        card.style.display = "block";
-      } else if (tabType.includes("pending") && card.classList.contains("pending")) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
+  // Fetch challenges from the backend
+  function fetchChallenges() {
+    fetch('../api/challenge/get_challenges.php')  // Adjust the API endpoint
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          renderChallenges(data.challenges);
+        } else {
+          alert("Error fetching challenges: " + (data.message || 'Unknown error'));
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching challenges:", error);
+        alert("Failed to load challenges.");
+      });
   }
 
-  // Toggle status tabs (Active Challenges, Completed, Pending)
-  statusButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      // Reset active class
-      statusButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+ // Render challenge cards dynamically
+function renderChallenges(challenges) {
+  const baseUrl = "http://localhost/cgp-sara/";  // Replace with your actual base URL
+  const challengeCards = challenges.map(challenge => {
+    const cardClass = challenge.status.toLowerCase();
+    const challenger = challenge.challenger;
+    const challenged = challenge.challenged;
 
-      // Get the status type
-      const statusType = btn.textContent.toLowerCase();
-      
-      // Filter cards based on selected status
-      if (statusType.includes("active")) {
-        filterCardsByStatus("active");
-      } else if (statusType.includes("completed")) {
-        filterCardsByStatus("completed");
-      } else if (statusType.includes("pending")) {
-        filterCardsByStatus("pending");
-      }
-    });
-  });
+    // Only prepend the base URL if the profile image path is relative
+    const challengerImage = challenger.profile_image.startsWith('http')
+      ? challenger.profile_image
+      : baseUrl + challenger.profile_image;
 
-  // Filter cards based on status
-  function filterCardsByStatus(status) {
-    cards.forEach(card => {
-      if (card.classList.contains(status)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
+    const challengedImage = challenged.profile_image.startsWith('http')
+      ? challenged.profile_image
+      : baseUrl + challenged.profile_image;
 
-  // Accept / Decline buttons
-  const acceptButtons = document.querySelectorAll(".accept");
-  const declineButtons = document.querySelectorAll(".decline");
-
-  acceptButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
-      const card = e.target.closest(".card");
-      
-      // Add visual feedback
-      button.innerHTML = '<i class="fas fa-check"></i> Accepted';
-      button.style.pointerEvents = 'none';
-      
-      // Add animation
-      card.style.transition = "all 0.5s ease";
-      card.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
-      
-      // Update card status with animation
-      setTimeout(() => {
-        card.classList.remove("pending");
-        card.classList.add("active");
-        
-        // Update status badge
-        const statusBadge = card.querySelector(".status");
-        statusBadge.className = "status active";
-        statusBadge.textContent = "Active";
-        
-        // Remove buttons and add progress and new action button
-        const buttonContainer = card.querySelector(".buttons");
-        buttonContainer.innerHTML = `
-          <div class="progress-container">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-bar"><div style="width: 0%;"></div></div>
+    return `
+      <div class="card ${cardClass}">
+        <span class="status ${cardClass}">${capitalizeFirstLetter(challenge.status)}</span>
+        <div class="top-line">
+          <div class="player">
+            <img src="${challengerImage}" alt="${challenger.name}" />
+            <p>${challenger.name} <span class="xp">${challenger.xp} XP</span></p>
           </div>
-          <button class="card-action-btn active-card-btn"><i class="fas fa-chart-line"></i> View Progress</button>
-        `;
-        
-        // Add event listener to the new button
-        const newBtn = buttonContainer.querySelector('.card-action-btn');
-        newBtn.addEventListener('click', () => {
-          alert("Challenge progress details will be shown here!");
-        });
-        
-        card.style.backgroundColor = "#fff";
-      }, 600);
-      
-      // Update counts
-      updateCounts();
-    });
-  });
+          <div class="vs-container">
+            <span class="vs">VS</span>
+          </div>
+          <div class="player">
+            <img src="${challengedImage}" alt="${challenged.name}" />
+            <p>${challenged.name} <span class="xp">${challenged.xp} XP</span></p>
+          </div>
+        </div>
+        <div class="info">
+          ${challenge.status === 'active' ? `<div class="time-left"><i class="fas fa-hourglass-half"></i><p>23h 45m left</p></div>` : ''}
+          <div class="start-date">
+            <i class="far fa-calendar-alt"></i>
+            <p>Started: ${new Date(challenge.startTime).toLocaleDateString()}</p>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-label">
+            <span>Progress</span>
+            <span>80%</span>
+          </div>
+          <div class="progress-bar">
+            <div style="width: 80%;"></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
 
-  declineButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
-      const card = e.target.closest(".card");
-      
-      // Add visual feedback
-      button.innerHTML = '<i class="fas fa-times"></i> Declined';
-      button.style.pointerEvents = 'none';
-      
-      // Add animation
-      card.style.transition = "all 0.5s ease";
-      card.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
-      
-      // Fade out card
-      setTimeout(() => {
-        card.style.opacity = "0";
-        card.style.transform = "scale(0.8)";
-        
-        // Remove card after animation
-        setTimeout(() => {
-          card.remove();
-          updateCounts();
-        }, 300);
-      }, 600);
-    });
-  });
+  container.innerHTML = challengeCards;
+}
 
-  // Update counts in status tabs
-  function updateCounts() {
-    const activeCount = document.querySelectorAll(".card.active").length;
-    const completedCount = document.querySelectorAll(".card.completed").length;
-    const pendingCount = document.querySelectorAll(".card.pending").length;
-    
-    document.querySelector(".status-tab:nth-child(1) .count").textContent = activeCount;
-    document.querySelector(".status-tab:nth-child(2) .count").textContent = completedCount;
-    document.querySelector(".status-tab:nth-child(3) .count").textContent = pendingCount;
+  
+
+  // Capitalize the first letter of the string
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  // Card action buttons for active and completed cards
-  const actionButtons = document.querySelectorAll(".card-action-btn");
-  
-  actionButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
-      const card = e.target.closest(".card");
-      
-      if (card.classList.contains("active")) {
-        // Show active challenge details
-        alert("Challenge progress details will be shown here!");
-      } else if (card.classList.contains("completed")) {
-        // Show completed challenge results
-        alert("Challenge results and statistics will be shown here!");
-      }
-    });
-  });
-
-  // New challenge button
-  const newChallengeButton = document.querySelector(".new-challenge-btn");
-  
-  newChallengeButton.addEventListener("click", () => {
-    alert("Create new challenge feature will be available soon!");
-  });
+  // Initial fetch challenges when page loads
+  fetchChallenges();
 });
