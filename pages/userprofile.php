@@ -12,6 +12,17 @@ if ($user_email) {
         $notes[] = $note;
     }
 }
+$sessions = [];
+
+if ($user_email) {
+    $sessionCollection = $db->sessions;
+    $sessionsCursor = $sessionCollection->find(['createdBy' => $user_email]);
+
+    foreach ($sessionsCursor as $session) {
+        $sessions[] = $session;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,18 +158,35 @@ $profileImage = isset($user['profile_image']) ? "../" . $user['profile_image'] :
         <div class="section-header">
             <h2>My Sessions</h2>
         </div>
-        <div class="card-container">
-            <div class="card">
-                <h3 class="card-title">OOP Revision</h3>
-                <p class="card-text">Date: 2025-04-25 | Time: 7:00 PM</p>
-                <button class="card-button">Join Zoom</button>
-            </div>
-            <div class="card">
-                <h3 class="card-title">DBMS Practice</h3>
-                <p class="card-text">Date: 2025-04-30 | Time: 6:00 PM</p>
-                <button class="card-button">View Details</button>
-            </div>
-        </div>
+        <div class="sessions-grid" id="sessions-grid">
+    <?php
+        if (empty($sessions)) {
+            echo "<p>You haven't hosted any sessions yet.</p>";
+        } else {
+            foreach ($sessions as $session) {
+                $categoryId = isset($session['category']) ? (string)$session['category'] : null;
+                $categoryName = isset($categoryNames[$categoryId]) ? $categoryNames[$categoryId] : 'Unknown Category';
+
+                if (isset($session['date'])) {
+                    $date = $session['date']->toDateTime();
+                    $formattedDate = $date->format('d M Y');
+                } else {
+                    $formattedDate = 'N/A';
+                }
+
+                echo "<div class='session-card' data-category='$categoryName'>";
+                echo "<h3 class='session-topic'>" . htmlspecialchars($session['topic']) . "</h3>";
+                echo "<p><strong>Hosted by:</strong> " . htmlspecialchars($session['hostedBy']) . "</p>";
+                echo "<p><strong>Duration:</strong> " . htmlspecialchars($session['duration']) . "</p>";
+                echo "<p><strong>Date:</strong> " . $formattedDate . "</p>";
+                echo "<p><strong>Time:</strong> " . date('h:i A', strtotime($session['time'])) . "</p>";
+                echo "<button class='join-btn' onclick='window.open(\"" . htmlspecialchars($session['meetingLink']) . "\", \"_blank\")'>Join</button>";
+                echo "</div>";
+            }
+        }
+    ?>
+</div>
+
     </section>
 </div>
 

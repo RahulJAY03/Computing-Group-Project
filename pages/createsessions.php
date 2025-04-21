@@ -23,7 +23,8 @@
    <div class="container">
       <h1>Create a Session</h1>
 
-      <form action="../api/zoom/createSession.php" method="POST" class="form-container">
+      <form id="createSessionForm" action="../api/zoom/createSession.php" method="POST" class="form-container">
+
         <label for="category">Select a Category</label>
         <select id="category" name="category">
             <option value="">Select a category</option>
@@ -90,17 +91,47 @@
 
    
 <script>
-        // Listen for form submission
-        document.getElementById('createSessionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting normally
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('createSessionForm');
 
-            // Show success alert
-            alert('Session created successfully!');
+    form.addEventListener('submit', function (event) {
+        const category = document.getElementById('category').value.trim();
+        const module = document.getElementById('module').value.trim();
+        const topic = document.getElementById('topic').value.trim();
+        const hosted = document.getElementById('hosted').value.trim();
+        const duration = document.getElementById('duration').value.trim();
+        const date = document.getElementById('date').value.trim();
+        const time = document.getElementById('time').value.trim();
+        const meetingLink = document.getElementById('meetingLink').value.trim();
 
-            // After alert is closed, refresh the page
-            location.reload();
-        });
-    </script>
+        let errorMessages = [];
+
+        if (!category) errorMessages.push("Please select a category.");
+        if (!module) errorMessages.push("Please select a module.");
+        if (!topic) errorMessages.push("Topic is required.");
+        if (!hosted) errorMessages.push("Host name is required.");
+        if (!duration || isNaN(duration)) errorMessages.push("Duration must be a number.");
+        if (!date) errorMessages.push("Date is required.");
+        if (!time) errorMessages.push("Time is required.");
+        if (!meetingLink || !isValidURL(meetingLink)) errorMessages.push("Please enter a valid meeting link.");
+
+        if (errorMessages.length > 0) {
+            event.preventDefault(); // Prevent form submission
+            alert(errorMessages.join("\n")); // Show all errors
+        }
+    });
+
+    function isValidURL(str) {
+        try {
+            new URL(str);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+});
+</script>
+
 
    <script src="../assets/js/script.js"></script>
    <script src="../assets/js/bootstrap.bundle.min.js"></script>

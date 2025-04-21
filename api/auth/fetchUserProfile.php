@@ -28,7 +28,8 @@ echo json_encode([
     "fullName" => $user["fullName"] ?? "",
     "university" => $user["university"] ?? "",
     "studyProgram" => $user["studyProgram"] ?? "",
-    "graduationDate" => isset($user["graduationDate"]) ? date("Y", strtotime($user["graduationDate"])) : "",
+  "graduationDate" => isset($user["graduationDate"]) ? $user["graduationDate"]->toDateTime()->format("d M Y") : "",
+
     "profile_image" => $profileImage // Add profile image
 ]);
 ?>

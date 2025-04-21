@@ -98,5 +98,13 @@
             });
         });
     </script>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+<script>
+    window.onload = function() {
+        alert("Session created successfully! XP increased by 10.");
+    };
+</script>
+<?php endif; ?>
+
 </body>
 </html>
