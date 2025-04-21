@@ -318,3 +318,18 @@ body {
         max-width: 100%;
     }
 }
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: gray;
+    cursor: pointer;
+    padding: 0;
+  }
+  .like-btn.liked {
+    color: red;
+  }
+  .like-section {
+    margin-top: 10px;
+  }
+  

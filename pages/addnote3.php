@@ -30,17 +30,16 @@
         <div class="file-box">
             <div>
                 <strong style="color: green;">✔ Upload complete</strong>
-                <p>images.jpg<br>File size: 10 KB</p>
             </div>
-            <a href="#" class="text-decoration-none" style="color: green;">Open document →</a>
         </div>
         
         <div class="buttons">
-            <button class="btn btn-success btn-custom">Upload more files</button>
-            <button class="btn btn-dark btn-custom btn-glow" id="proceedButton">Back to Home</button>
+            <a href = "addnote2.php"><button class="btn btn-success btn-custom">Upload more files</button></a>
+            <a href = "index.php"><button class="btn btn-dark btn-custom btn-glow" id="proceedButton">Back to Home</button>
         </div>
     </div>
 </div>
-
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/script.js"></script>
 </body>
 </html>

@@ -92,6 +92,8 @@ $notesCursor = $db->notes->find([
 $notes = iterator_to_array($notesCursor);
 ?>
 
+
+
 <!-- Document Content -->
 <div id="document-content" class="tab-content">
   <div class="filter-bar">
@@ -122,60 +124,75 @@ $notes = iterator_to_array($notesCursor);
       <p>No documents found for this module.</p>
     <?php else: ?>
       <?php foreach ($notes as $note): ?>
-        <?php
-          $title = htmlspecialchars($note['title']);
-          $desc = htmlspecialchars($note['description']);
-          $language = strtolower($note['language']);
-          $docType = strtoupper($note['doc_type']);
-          $originalPath = $note['file_path'];
-          $cleanPath = str_replace('../../', '', $originalPath);  // removes the '../../'
-          $fixedFilePath = '/cgp-sara/' . $cleanPath;
-          
+  <?php
+    $title = htmlspecialchars($note['title']);
+    $desc = htmlspecialchars($note['description']);
+    $language = strtolower($note['language']);
+    $docType = strtoupper($note['doc_type']);
+    $originalPath = $note['file_path'];
+    $cleanPath = str_replace('../../', '', $originalPath);  // removes the '../../'
+    $fixedFilePath = '/cgp-sara/' . $cleanPath;
 
-          $uploadDate = $note['created_at']->toDateTime()->format("d M Y");
-          $timestamp = $note['created_at']->toDateTime()->getTimestamp();
-          $extension = strtolower(pathinfo($note['file_name'], PATHINFO_EXTENSION));
-          $iconPath = "../assets/images/default-doc.png";
-          $icons = [
-            'pdf' => '../assets/images/pdf.png',
-            'doc' => '../assets/images/doc.png',
-            'docx' => '../assets/images/doc.png',
-            'zip' => '../assets/images/zip.png',
-            'jpg' => '../assets/images/img.png',
-            'jpeg' => '../assets/images/img.png',
-            'png' => '../assets/images/img.png',
-          ];
-          if (array_key_exists($extension, $icons)) {
-            $iconPath = $icons[$extension];
-          }
-        ?>
-        <div class="document-item"
-             data-type="<?= $docType ?>"
-             data-lang="<?= $language ?>"
-             data-time="<?= $timestamp ?>">
-          <!-- Icon placed top-left corner -->
-          <img src="<?= $iconPath ?>" alt="Document Icon" class="doc-img">
+    $uploadDate = $note['created_at']->toDateTime()->format("d M Y");
+    $timestamp = $note['created_at']->toDateTime()->getTimestamp();
+    $extension = strtolower(pathinfo($note['file_name'], PATHINFO_EXTENSION));
+    $iconPath = "../assets/images/default-doc.png";
+    $icons = [
+      'pdf' => '../assets/images/pdf.png',
+      'doc' => '../assets/images/doc.png',
+      'docx' => '../assets/images/doc.png',
+      'zip' => '../assets/images/zip.png',
+      'jpg' => '../assets/images/img.png',
+      'jpeg' => '../assets/images/img.png',
+      'png' => '../assets/images/img.png',
+    ];
+    if (array_key_exists($extension, $icons)) {
+      $iconPath = $icons[$extension];
+    }
 
-          <!-- Title centered on top, bold text -->
-          <div class="document-info">
-            <h3><a href="<?= $filePath ?>" target="_blank"><?= $title ?></a></h3>
-            <p class="desc"><?= $desc ?></p>
-            <div class="metadata">
-              <span><?= $docType ?> | <?= ucfirst($language) ?></span><br>
-              <span>Uploaded on: <?= $uploadDate ?></span>
-            </div>
-            
+    // LIKE FEATURE
+    $noteId = (string) $note['_id'];
+    $likeCount = $db->likes->countDocuments(['noteId' => $noteId]);
+    $userLiked = $db->likes->findOne([
+      'userId' => $_SESSION['email'],
+      'noteId' => $noteId
+    ]);
+    $isLiked = $userLiked ? 'liked' : '';
+  ?>
+  <div class="document-item"
+       data-type="<?= $docType ?>"
+       data-lang="<?= $language ?>"
+       data-time="<?= $timestamp ?>">
+    <!-- Icon placed top-left corner -->
+    <img src="<?= $iconPath ?>" alt="Document Icon" class="doc-img">
 
-            <div class="document-actions">
+    <!-- Title centered on top, bold text -->
+    <div class="document-info">
+      <h3><a href="<?= $fixedFilePath ?>" target="_blank"><?= $title ?></a></h3>
+      <p class="desc"><?= $desc ?></p>
+      <div class="metadata">
+        <span><?= $docType ?> | <?= ucfirst($language) ?></span><br>
+        <span>Uploaded on: <?= $uploadDate ?></span>
+      </div>
+
+      <div class="document-actions">
   <a href="<?= $fixedFilePath ?>" class="download-btn" download><i class="bi bi-download"></i></a>
   <a href="<?= $fixedFilePath ?>" target="_blank" class="view-btn"><i class="bi bi-eye"></i> View</a>
+
+  <button class="like-btn <?= $isLiked ?>" data-note-id="<?= $noteId ?>">
+    <i class="bi <?= $isLiked ? 'bi-heart-fill' : 'bi-heart' ?>"></i>
+    <span class="like-count"><?= $likeCount ?></span>
+  </button>
 </div>
 
 
+      <div class="like-section">
+       
+      </div>
+    </div>
+  </div>
+<?php endforeach; ?>
 
-          </div>
-        </div>
-      <?php endforeach; ?>
     <?php endif; ?>
   </div>
 </div>
@@ -438,6 +455,32 @@ function toggleComments(button) {
   }
 }
 </script>
+
+<script>
+document.querySelectorAll('.like-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const noteId = button.dataset.noteId;
+
+    fetch('../api/auth/like-note.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `noteId=${noteId}`
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'success') {
+        button.classList.toggle('liked', data.liked);
+        const icon = button.querySelector('i');
+        icon.classList.toggle('bi-heart-fill', data.liked);
+        icon.classList.toggle('bi-heart', !data.liked);
+        button.querySelector('.like-count').textContent = data.totalLikes;
+      }
+    });
+  });
+});
+
+</script>
+
 <script src="../assets/js/script.js"></script>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 

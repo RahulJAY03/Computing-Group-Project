@@ -127,6 +127,9 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
     .then(data => {
         if (data.success) {
             alert("File uploaded successfully! XP increased by 10.");
+            setTimeout(() => {
+                window.location.href = "addnote3.php";
+            },0);
         } else {
             alert("Upload failed: " + data.error);
         }
