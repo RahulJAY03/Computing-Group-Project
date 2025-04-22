@@ -69,8 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "language" => $_POST['language'] ?? "",
             "title" => $_POST['title'] ?? "",
             "description" => $_POST['description'] ?? "",
+            "totalLikes" => 0, // 👈 Initialize likes count
             "created_at" => new MongoDB\BSON\UTCDateTime()
         ]);
+        
 
         if ($insertResult->getInsertedCount() > 0) {
             // **Update user's XP in MongoDB**
