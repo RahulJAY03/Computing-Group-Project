@@ -32,6 +32,10 @@
     <div class="card-group" id="challenge-cards">
       <!-- Dynamic challenges will be injected here -->
     </div>
+
+    <div class="winner-container">
+      <!-- Winner details will be dynamically injected here -->
+    </div>
   </div>
 </div>
 

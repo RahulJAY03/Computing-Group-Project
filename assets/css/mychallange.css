@@ -234,8 +234,9 @@ body {
 /* Card Group */
 .card-group {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
   gap: 24px;
+  justify-content: center; /* Center the grid */
 }
 
 /* Card */
@@ -280,7 +281,7 @@ body {
 .player {
   text-align: center;
   flex: 1;
-  display: flex;
+  
   flex-direction: column;
   align-items: center;
   padding: 0 5px; /* Add padding to ensure space between players */
@@ -506,6 +507,25 @@ body {
   font-weight: 500;
 }
 
+/* Style for the winner details */
+.winner {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.winner img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.winner p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .top-header {
@@ -542,6 +562,13 @@ body {
     white-space: nowrap;
   }
 }
+
+@media (min-width: 576px) {
+    .card-group {
+        flex-flow: row wrap;
+    }
+}
+
 .action-buttons {
   display: flex;
   gap: 10px;

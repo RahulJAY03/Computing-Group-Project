@@ -79,6 +79,25 @@ foreach ($challengesCursor as $challenge) {
             'profile_image' => $challengedImage
         ]
     ];
+
+    // Fetch winner details if winnerId is present
+    if (isset($challenge['winnerId'])) {
+        $winnerObjId = $challenge['winnerId'];
+        try {
+            $winner = $db->users->findOne(['_id' => $winnerObjId]);
+            if ($winner) {
+                $winnerImage = $baseUrl . ltrim($winner['profile_image'], '/');
+                $data[count($data) - 1]['winner'] = [
+                    'id' => (string)$winnerObjId,
+                    'name' => $winner['fullName'],
+                    'xp' => $winner['xp'] ?? 0,
+                    'profile_image' => $winnerImage
+                ];
+            }
+        } catch (Exception $e) {
+            log_debug("Error fetching winner data: " . $e->getMessage());
+        }
+    }
 }
 
 log_debug("Total challenges found: " . count($data));
