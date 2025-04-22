@@ -180,13 +180,13 @@
                         <input type="checkbox" id="remember-me">
                         <label for="remember-me">Remember me</label>
                     </div>
-                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <a href="forgot_password.php" class="forgot-password">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="signup-btn">Login</button>
             </form>
 
-            <p class="center-text">No account? <a href="#" class="signup-link" onclick="openSignupFromLogin()">Register for free</a></p>
+            <p class="center-text">No account? <a href="#" class="signup-link" onclick="openSignup()">Register for free</a></p>
             <p class="center-text">Or login with</p>
             <div class="social-login">
                 <div id="login-google-btn" class="g-signin2"></div>
