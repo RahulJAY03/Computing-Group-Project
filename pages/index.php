@@ -1,3 +1,28 @@
+<?php
+require_once '../config/db.php';
+session_start();
+
+// Assume user email is stored in session
+$email = $_SESSION['email'] ?? null;
+
+$fullName = "User";
+$xp = 0;
+
+if ($email) {
+    $client = new MongoDB\Client("mongodb://localhost:27017");
+    $db = $client->thekuppiya;
+    $usersCollection = $db->users;
+
+    $user = $usersCollection->findOne(['email' => $email]);
+
+    if ($user) {
+        $fullName = $user['fullName'] ?? "User";
+        $xp = $user['xp'] ?? 0;
+    }
+}
+
+$today = date("F j, Y"); // Example: April 21, 2025
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,28 +44,21 @@
     ?>
 
 <div class="content-wrapper">
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Welcome back, John!</h1>
-      <p>Here's what's happening today <span class="date">April 19, 2025</span></p>
-    </div>
-    <div class="quick-stats">
-      <div class="stat-card">
-        <i class="fas fa-book-open"></i>
-        <div class="stat-info">
-          <span>540</span>
-          <p>XP Points</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <i class="fas fa-fire"></i>
-        <div class="stat-info">
-          <span>12</span>
-          <p>Day Streak</p>
-        </div>
+<div class="hero">
+  <div class="hero-content">
+    <h1>Welcome back, <?= htmlspecialchars($fullName) ?>!</h1>
+    <p>Here's what's happening today <span class="date"><?= $today ?></span></p>
+  </div>
+  <div class="quick-stats">
+    <div class="stat-card">
+      <i class="fas fa-book-open"></i>
+      <div class="stat-info">
+        <span><?= $xp ?></span>
+        <p>XP Points</p>
       </div>
     </div>
   </div>
+</div>
 
   <div class="main-content">
     <div class="notes-section">
@@ -97,46 +115,28 @@
         <h2><i class="fas fa-chalkboard-teacher"></i> Suggested Sessions</h2>
         <a href="#">View All <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="session-card">
-        <div class="session-time">
-          <span class="time">2:00 PM</span>
-          <span class="day">Today</span>
-        </div>
-        <div class="session-info">
-          <h4>Advanced Python Programming</h4>
-          <p><i class="fas fa-user-tie"></i> Dr. Sarah Wilson</p>
-          <div class="session-participants">
-            <div class="avatars">
-              <img src="https://i.pravatar.cc/150?img=1" alt="Participant">
-              <img src="https://i.pravatar.cc/150?img=2" alt="Participant">
-              <img src="https://i.pravatar.cc/150?img=3" alt="Participant">
-            </div>
-            <span>+12 joined</span>
-          </div>
-        </div>
-        <button class="join">Join Now</button>
-      </div>
-      <div class="session-card">
-        <div class="session-time">
-          <span class="time">10:00 AM</span>
-          <span class="day">Tomorrow</span>
-        </div>
-        <div class="session-info">
-          <h4>Web Development Workshop</h4>
-          <p><i class="fas fa-user-tie"></i> Mike Johnson</p>
-          <div class="session-participants">
-            <div class="avatars">
-              <img src="https://i.pravatar.cc/150?img=4" alt="Participant">
-              <img src="https://i.pravatar.cc/150?img=5" alt="Participant">
-            </div>
-            <span>+8 joined</span>
-          </div>
-        </div>
-        <button class="join">Join Now</button>
-      </div>
+   
     </div>
   </div>
 </div>
+
+
+<script>
+
+  // Load Recommended Notes
+  fetch('../api/auth/getRecommendedNotes.php')
+    .then(res => res.text())
+    .then(html => {
+      document.querySelector('.notes-grid').innerHTML = html;
+    });
+
+  // Load Suggested Sessions
+  fetch('../api/auth/getTodaySessions.php')
+    .then(res => res.text())
+    .then(html => {
+      document.querySelector('.sessions-section').innerHTML += html;
+    });
+</script>
 
   <script src="dashboard.js"></script>
   <script src="../assets/js/script.js"></script>

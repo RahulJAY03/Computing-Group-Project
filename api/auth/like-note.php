@@ -13,6 +13,7 @@ $userId = $_SESSION['email'];
 $noteId = $_POST['noteId'];
 
 $likesCollection = $db->likes;
+$notesCollection = $db->notes;
 
 // Check if like exists
 $existing = $likesCollection->findOne([
@@ -33,8 +34,14 @@ if ($existing) {
     $liked = true;
 }
 
-// Return total likes
+// Recount total likes
 $totalLikes = $likesCollection->countDocuments(['noteId' => $noteId]);
+
+// Update note with new totalLikes
+$notesCollection->updateOne(
+    ['_id' => new MongoDB\BSON\ObjectId($noteId)],
+    ['$set' => ['totalLikes' => $totalLikes]]
+);
 
 echo json_encode([
     'status' => 'success',
