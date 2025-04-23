@@ -28,8 +28,11 @@ foreach ($users as $user) {
     }
 }
 
+// Calculate the percentage of XP relative to 1000
+$xpPercentage = ($currentUserXP / 1000) * 100;
+
 // Cap XP shown in the progress bar at 100
-$xpDisplay = min(100, $currentUserXP);
+$xpDisplay = min(1000, $currentUserXP);
 
 ?>
 
@@ -68,8 +71,8 @@ $xpDisplay = min(100, $currentUserXP);
     <h5>Your journey so far</h5>
     <div class="progress">
         <div class="progress-bar progress-xp" role="progressbar"
-            style="width: <?= $xpDisplay ?>%;" 
-            aria-valuenow="<?= $xpDisplay ?>" aria-valuemin="0" aria-valuemax="100">
+            style="width: <?= $xpPercentage ?>%;" 
+            aria-valuenow="<?= $xpPercentage ?>" aria-valuemin="0" aria-valuemax="100">
             <?= $currentUserXP ?> XP
         </div>
     </div>

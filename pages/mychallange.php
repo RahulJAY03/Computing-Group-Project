@@ -13,6 +13,7 @@
 <?php
     include '../includes/navbar.php';  
     include '../includes/sidebar.php';  
+    include '../api/chatbot/Chatbot.php';
 ?>
 
 <div class="main-content">
