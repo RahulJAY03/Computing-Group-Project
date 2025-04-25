@@ -574,13 +574,61 @@ body {
 
 .action-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 0 10px;
 }
 
 .accept-btn,
 .decline-btn {
-  padding: 5px 10px;
-  font-size: 0.9rem;
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accept-btn {
+  background-color:#65df98;
+  color: white;
+}
+
+.accept-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.2);
+}
+
+.decline-btn {
+  background-color: white;
+  color:#be3e64;
+  border: 1px solid var(--danger-color);
+}
+
+.decline-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+}
+
+/* Add responsive styles for buttons */
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .accept-btn,
+  .decline-btn {
+    width: 100%;
+  }
 }

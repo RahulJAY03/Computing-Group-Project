@@ -45,7 +45,7 @@ console.log("Chatbase HMAC: <?php echo $hmac; ?>");
 $userEmail = $_SESSION['email'] ?? 'guest@example.com'; // fallback if not logged in
 
 // Your secret key from Chatbase dashboard
-$secret = '20vg3bd462zt4s87y7ljs1pbulpye9pc'; // Replace this with your actual secret key
+// Replace this with your actual secret key
 
 // Generate the HMAC hash
 $hmac = hash_hmac('sha256', $userEmail, $secret);

@@ -177,8 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
           
           ${challengeStatus === 'pending' ? `
             <div class="action-buttons">
-              <button class="btn btn-success btn-sm accept-btn" data-id="${challenge._id}">Accept</button>
-              <button class="btn btn-danger btn-sm decline-btn" data-id="${challenge._id}">Decline</button>
+              <button class="btn btn-success btn-sm accept-btn" data-id="${challenge._id}">
+                <i class="fas fa-check"></i> Accept
+              </button>
+              <button class="btn btn-danger btn-sm decline-btn" data-id="${challenge._id}">
+                <i class="fas fa-times"></i> Decline
+              </button>
             </div>
           ` : ''}
           ${winnerDisplay}
