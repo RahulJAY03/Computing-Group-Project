@@ -71,13 +71,44 @@ session_start();
                 <button class="save-btn password-save-btn">Save changes</button>
             </form>
         </div>
+
+        <!-- Delete Account Section -->
+        <div class="section3 mt-4">
+            <h3>Delete Account</h3>
+            <button class="btn btn-danger delete-account-btn"><i class="bi bi-trash"></i> Delete Account</button>
+            <p class="text-danger mt-2" style="font-size: 0.95em;">Warning: This action is irreversible. Your account will be deactivated and you will be logged out.</p>
+        </div>
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteBtn = document.querySelector('.delete-account-btn');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                fetch('/Cgp-sara/api/auth/delete_account.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ delete: true })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Your account has been deleted.');
+                        window.location.href = '/Cgp-sara/pages/landingpage.php';
+                    } else {
+                        alert(data.message || 'Failed to delete account.');
+                    }
+                })
+                .catch(() => alert('An error occurred. Please try again.'));
+            }
+        });
+    }
+});
+</script>
 
-    
-    
-    <script src="/Cgp-sara/assets/js/script.js" defer></script>
+<script src="/Cgp-sara/assets/js/script.js" defer></script>
 <script src="/Cgp-sara/assets/js/setting.js" defer></script>
 <script src="/Cgp-sara/assets/js/bootstrap.bundle.min.js" defer></script>
 

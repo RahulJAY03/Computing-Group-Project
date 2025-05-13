@@ -66,8 +66,8 @@ $profileImage = isset($user['profile_image']) ? "../" . $user['profile_image'] :
         </div>
     </header>
 
-    <section class="info-section">
-        <div class="studies">
+    <section class="info-section" >
+        <div class="studies" style="align: center;">
             <h2>My Studies</h2>
             <div class="study-details">
                 <div class="study-item">
@@ -84,19 +84,8 @@ $profileImage = isset($user['profile_image']) ? "../" . $user['profile_image'] :
                 </div>
             </div>
         </div>
-        <div class="stats">
-            <h2>My Stats</h2>
-            <div class="stat-details">
-                <div class="stat-item">
-                    <img src="../assets/images/earn.png" alt="User Avatar">
-                    <p>Credit Points: 0</p>
-                </div>
-                <div class="stat-item">
-                    <img src="../assets/images/inbox.png" alt="User Avatar">
-                    <p>Downloads/Views: 0</p>
-                </div>
-            </div>
-        </div>
+       
+        
     </section>
 
     <!-- My Documents Section -->
